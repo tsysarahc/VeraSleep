@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- 連結 PWA 配置文件 -->
-<link rel="manifest" href="manifest.json">
-<!-- 讓 iOS (Safari) 也能支援全螢幕桌面應用 -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="VERA">
-<link rel="apple-touch-icon" href="icon-192.png">
+    <!-- 連結 PWA 配置文件 -->
+    <link rel="manifest" href="manifest.json">
+    <!-- 讓 iOS (Safari) 也能支援全螢幕桌面應用 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="VERA">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <title>VERA - Nightly Sanctuary</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -324,64 +324,64 @@
         ];
 
         const imageDatabase = [
-            { filename: "3_o_clock.jpeg", category: "daily", keywords: ["三點", "下午茶", "3點", "休息"], isRare: false },
-            { filename: "back_up.jpeg", category: "work", keywords: ["備份", "backup", "資料", "存檔"], isRare: false },
-            { filename: "bills.jpeg", category: "daily", keywords: ["帳單", "交水電", "交租", "找數", "使費"], isRare: false },
-            { filename: "call_somebody.jpeg", category: "daily", keywords: ["打電話", "打畀", "聯絡", "傾電話", "覆電"], isRare: false },
-            { filename: "cardstatement.jpeg", category: "daily", keywords: ["信用卡", "卡數", "statement", "找卡數", "欠款"], isRare: true },
-            { filename: "collect_online_shopping.jpeg", category: "daily", keywords: ["取件", "收網購", "攞包裹", "速遞", "順豐"], isRare: false },
-            { filename: "confirm_flight_ticket.jpeg", category: "travel", keywords: ["機票", "確認機票", "航班", "旅行"], isRare: true },
-            { filename: "contract.jpeg", category: "work", keywords: ["合約", "簽約", "合約文件", "文件"], isRare: true },
-            { filename: "festival_in_japan.jpeg", category: "travel", keywords: ["日本", "祭典", "旅行", "慶典"], isRare: false },
-            { filename: "fill_aroma_diffuser.jpeg", category: "daily", keywords: ["擴香", "香薰", "精油", "加濕器"], isRare: false },
-            { filename: "first_aid_box.jpeg", category: "misc", keywords: ["急救", "藥箱", "藥物", "膠布"], isRare: false },
-            { filename: "grocery.jpeg", category: "daily", keywords: ["買菜", "超市", "買東西", "購物", "買餸", "超級市場"], isRare: false },
-            { filename: "gym.jpeg", category: "daily", keywords: ["運動", "健身", "跑步", "鍛鍊", "gym"], isRare: false },
-            { filename: "hair_cut.jpeg", category: "daily", keywords: ["剪髮", "剪頭髮", "理髮", "整頭髮"], isRare: false },
-            { filename: "handover_notes.jpeg", category: "work", keywords: ["交接", "交接筆記", "handover", "筆記"], isRare: false },
-            { filename: "hang clothes.jpeg", category: "daily", keywords: ["晾衫", "曬衣服", "洗衣服", "收衫"], isRare: false },
-            { filename: "hiking.jpeg", category: "travel", keywords: ["行山", "爬山", "戶外", "郊遊"], isRare: false },
-            { filename: "hospital appointment.jpeg", category: "misc", keywords: ["看醫生", "醫院", "診所", "覆診", "醫生", "體檢"], isRare: true },
-            { filename: "inflight window.jpeg", category: "travel", keywords: ["飛機", "窗戶", "搭飛機", "航程"], isRare: false },
-            { filename: "insurance renewal.jpeg", category: "misc", keywords: ["保險", "續保", "保單"], isRare: false },
-            { filename: "iron shirt.jpeg", category: "daily", keywords: ["燙衫", "熨衣", "熨衫", "恤衫"], isRare: false },
-            { filename: "make reservation.jpeg", category: "daily", keywords: ["訂位", "預約", "訂桌", "book位"], isRare: false },
-            { filename: "manage charging cable.jpeg", category: "misc", keywords: ["充電線", "整理電線", "線材", "收拾"], isRare: false },
-            { filename: "meal table booking.jpeg", category: "daily", keywords: ["訂餐廳", "食飯", "聚餐", "飯局"], isRare: false },
-            { filename: "meeting.jpeg", category: "work", keywords: ["開會", "會議", "見客戶", "談判", "匯報"], isRare: false },
-            { filename: "night message.jpeg", category: "work", keywords: ["夜間訊息", "覆訊息", "短訊", "message"], isRare: false },
-            { filename: "online study.jpeg", category: "work", keywords: ["上課", "學習", "網課", "讀書", "溫書", "course"], isRare: false },
-            { filename: "parcel.jpeg", category: "daily", keywords: ["包裹", "快遞", "寄信", "速遞"], isRare: false },
-            { filename: "photo.jpeg", category: "misc", keywords: ["相片", "照片", "拍照", "沖相"], isRare: false },
-            { filename: "Pick up kids.jpeg", category: "daily", keywords: ["接小孩", "接放學", "接小朋友", "放學"], isRare: false },
-            { filename: "plan the weekend.jpeg", category: "travel", keywords: ["計畫週末", "週末", "行程", "放假"], isRare: false },
-            { filename: "plants.jpeg", category: "daily", keywords: ["植物", "園藝", "花草"], isRare: false },
-            { filename: "plumber.jpeg", category: "misc", keywords: ["水電", "修理", "維修", "師傅", "冷氣"], isRare: false },
-            { filename: "prepare gift.jpeg", category: "misc", keywords: ["準備禮物", "買禮物", "送禮"], isRare: false },
-            { filename: "presentation.jpeg", category: "work", keywords: ["簡報", "報告", "演講", "ppt", "slides"], isRare: true },
-            { filename: "raining night with a cup of tea.jpeg", category: "daily", keywords: ["雨夜", "茶", "下雨", "喝茶"], isRare: false },
-            { filename: "read books.jpeg", category: "daily", keywords: ["看書", "閱讀", "讀書", "睇書"], isRare: false },
-            { filename: "recharge octopus.jpeg", category: "travel", keywords: ["八達通", "增值", "八達通卡"], isRare: false },
-            { filename: "recharge travel card.jpeg", category: "travel", keywords: ["旅遊卡", "車票", "八達通", "交通卡"], isRare: false },
-            { filename: "Reporting.jpeg", category: "work", keywords: ["工作報告", "reporting", "交功課", "總結"], isRare: false },
-            { filename: "return book.jpeg", category: "daily", keywords: ["還書", "圖書館", "借書"], isRare: false },
-            { filename: "salad.jpeg", category: "daily", keywords: ["沙拉", "食齋", "輕食", "健康餐"], isRare: false },
-            { filename: "scatch.jpeg", category: "work", keywords: ["草稿", "速寫", "塗鴉", "筆記"], isRare: false },
-            { filename: "send happy birthday message.jpeg", category: "misc", keywords: ["生日", "慶祝", "祝福", "生日快樂"], isRare: false },
-            { filename: "snowing night in japan.jpeg", category: "travel", keywords: ["下雪", "雪夜", "日本雪景", "雪"], isRare: false },
-            { filename: "Study.jpeg", category: "work", keywords: ["溫書", "K書", "研讀", "筆記"], isRare: false },
-            { filename: "supplement.jpeg", category: "misc", keywords: ["保健品", "維他命", "食藥", "營養品"], isRare: false },
-            { filename: "tidy bedings.jpeg", category: "daily", keywords: ["整理床鋪", "執床", "床單"], isRare: false },
-            { filename: "tidy up desktop.jpeg", category: "work", keywords: ["整理桌面", "執檯", "桌面"], isRare: false },
-            { filename: "umbrella.jpeg", category: "daily", keywords: ["雨傘", "帶遮", "下雨"], isRare: false },
-            { filename: "utility bills.jpeg", category: "daily", keywords: ["交水電", "帳單", "差餉", "交租"], isRare: false },
-            { filename: "vitamin C supplement.jpeg", category: "misc", keywords: ["維他命c", "維生素", "保健食品"], isRare: false },
-            { filename: "water plants.jpeg", category: "daily", keywords: ["澆水", "淋花", "植物澆水"], isRare: false },
-            { filename: "writer block.jpeg", category: "work", keywords: ["寫作瓶頸", "靈感", "寫文章", "創作"], isRare: false }
+            { filename: "3_o_clock.jpg", category: "daily", keywords: ["三點", "下午茶", "3點", "休息"], isRare: false },
+            { filename: "back_up.jpg", category: "work", keywords: ["備份", "backup", "資料", "存檔"], isRare: false },
+            { filename: "bills.jpg", category: "daily", keywords: ["帳單", "交水電", "交租", "找數", "使費"], isRare: false },
+            { filename: "call_somebody.jpg", category: "daily", keywords: ["打電話", "打畀", "聯絡", "傾電話", "覆電"], isRare: false },
+            { filename: "cardstatement.jpg", category: "daily", keywords: ["信用卡", "卡數", "statement", "找卡數", "欠款"], isRare: true },
+            { filename: "collect_online_shopping.jpg", category: "daily", keywords: ["取件", "收網購", "攞包裹", "速遞", "順豐"], isRare: false },
+            { filename: "confirm_flight_ticket.jpg", category: "travel", keywords: ["機票", "確認機票", "航班", "旅行"], isRare: true },
+            { filename: "contract.jpg", category: "work", keywords: ["合約", "簽約", "合約文件", "文件"], isRare: true },
+            { filename: "festival_in_japan.jpg", category: "travel", keywords: ["日本", "祭典", "旅行", "慶典"], isRare: false },
+            { filename: "fill_aroma_diffuser.jpg", category: "daily", keywords: ["擴香", "香薰", "精油", "加濕器"], isRare: false },
+            { filename: "first_aid_box.jpg", category: "misc", keywords: ["急救", "藥箱", "藥物", "膠布"], isRare: false },
+            { filename: "grocery.jpg", category: "daily", keywords: ["買菜", "超市", "買東西", "購物", "買餸", "超級市場"], isRare: false },
+            { filename: "gym.jpg", category: "daily", keywords: ["運動", "健身", "跑步", "鍛鍊", "gym"], isRare: false },
+            { filename: "hair_cut.jpg", category: "daily", keywords: ["剪髮", "剪頭髮", "理髮", "整頭髮"], isRare: false },
+            { filename: "handover_notes.jpg", category: "work", keywords: ["交接", "交接筆記", "handover", "筆記"], isRare: false },
+            { filename: "hang_clothes.jpg", category: "daily", keywords: ["晾衫", "曬衣服", "洗衣服", "收衫"], isRare: false },
+            { filename: "hiking.jpg", category: "travel", keywords: ["行山", "爬山", "戶外", "郊遊"], isRare: false },
+            { filename: "hospital_appointment.jpg", category: "misc", keywords: ["看醫生", "醫院", "診所", "覆診", "醫生", "體檢"], isRare: true },
+            { filename: "inflight_window.jpg", category: "travel", keywords: ["飛機", "窗戶", "搭飛機", "航程"], isRare: false },
+            { filename: "insurance_renewal.jpg", category: "misc", keywords: ["保險", "續保", "保單"], isRare: false },
+            { filename: "iron_shirt.jpg", category: "daily", keywords: ["燙衫", "熨衣", "熨衫", "恤衫"], isRare: false },
+            { filename: "make_reservation.jpg", category: "daily", keywords: ["訂位", "預約", "訂桌", "book位"], isRare: false },
+            { filename: "manage_charging_cable.jpg", category: "misc", keywords: ["充電線", "整理電線", "線材", "收拾"], isRare: false },
+            { filename: "meal_table_booking.jpg", category: "daily", keywords: ["訂餐廳", "食飯", "聚餐", "飯局"], isRare: false },
+            { filename: "meeting.jpg", category: "work", keywords: ["開會", "會議", "見客戶", "談判", "匯報"], isRare: false },
+            { filename: "night_message.jpg", category: "work", keywords: ["夜間訊息", "覆訊息", "短訊", "message"], isRare: false },
+            { filename: "online_study.jpg", category: "work", keywords: ["上課", "學習", "網課", "讀書", "溫書", "course"], isRare: false },
+            { filename: "parcel.jpg", category: "daily", keywords: ["包裹", "快遞", "寄信", "速遞"], isRare: false },
+            { filename: "photo.jpg", category: "misc", keywords: ["相片", "照片", "拍照", "沖相"], isRare: false },
+            { filename: "pick_up_kids.jpg", category: "daily", keywords: ["接小孩", "接放學", "接小朋友", "放學"], isRare: false },
+            { filename: "plan_the_weekend.jpg", category: "travel", keywords: ["計畫週末", "週末", "行程", "放假"], isRare: false },
+            { filename: "plants.jpg", category: "daily", keywords: ["植物", "園藝", "花草"], isRare: false },
+            { filename: "plumber.jpg", category: "misc", keywords: ["水電", "修理", "維修", "師傅", "冷氣"], isRare: false },
+            { filename: "prepare_gift.jpg", category: "misc", keywords: ["準備禮物", "買禮物", "送禮"], isRare: false },
+            { filename: "presentation.jpg", category: "work", keywords: ["簡報", "報告", "演講", "ppt", "slides"], isRare: true },
+            { filename: "raining_night_with_a_cup_of_tea.jpg", category: "daily", keywords: ["雨夜", "茶", "下雨", "喝茶"], isRare: false },
+            { filename: "read_books.jpg", category: "daily", keywords: ["看書", "閱讀", "讀書", "睇書"], isRare: false },
+            { filename: "recharge_octopus.jpg", category: "travel", keywords: ["八達通", "增值", "八達通卡"], isRare: false },
+            { filename: "recharge_travel_card.jpg", category: "travel", keywords: ["旅遊卡", "車票", "八達通", "交通卡"], isRare: false },
+            { filename: "reporting.jpg", category: "work", keywords: ["工作報告", "reporting", "交功課", "總結"], isRare: false },
+            { filename: "return_book.jpg", category: "daily", keywords: ["還書", "圖書館", "借書"], isRare: false },
+            { filename: "salad.jpg", category: "daily", keywords: ["沙拉", "食齋", "輕食", "健康餐"], isRare: false },
+            { filename: "scatch.jpg", category: "work", keywords: ["草稿", "速寫", "塗鴉", "筆記"], isRare: false },
+            { filename: "send_happy_birthday_message.jpg", category: "misc", keywords: ["生日", "慶祝", "祝福", "生日快樂"], isRare: false },
+            { filename: "snowing_night_in_japan.jpg", category: "travel", keywords: ["下雪", "雪夜", "日本雪景", "雪"], isRare: false },
+            { filename: "study.jpg", category: "work", keywords: ["溫書", "K書", "研讀", "筆記"], isRare: false },
+            { filename: "supplement.jpg", category: "misc", keywords: ["保健品", "維他命", "食藥", "營養品"], isRare: false },
+            { filename: "tidy_bedings.jpg", category: "daily", keywords: ["整理床鋪", "執床", "床單"], isRare: false },
+            { filename: "tidy_up_desktop.jpg", category: "work", keywords: ["整理桌面", "執檯", "桌面"], isRare: false },
+            { filename: "umbrella.jpg", category: "daily", keywords: ["雨傘", "帶遮", "下雨"], isRare: false },
+            { filename: "utility_bills.jpg", category: "daily", keywords: ["交水電", "帳單", "差餉", "交租"], isRare: false },
+            { filename: "vitamin_c_supplement.jpg", category: "misc", keywords: ["維他命c", "維生素", "保健食品"], isRare: false },
+            { filename: "water_plants.jpg", category: "daily", keywords: ["澆水", "淋花", "植物澆水"], isRare: false },
+            { filename: "writer_block.jpg", category: "work", keywords: ["寫作瓶頸", "靈感", "寫文章", "創作"], isRare: false }
         ];
 
         function matchImageAndCategory(taskText) {
-            if (!taskText) return { filename: "read books.jpeg", category: "daily" };
+            if (!taskText) return { filename: "read_books.jpg", category: "daily" };
             const text = taskText.toLowerCase();
             for (let item of imageDatabase) {
                 if (item.keywords) {
@@ -393,12 +393,12 @@
                 }
             }
             for (let item of imageDatabase) {
-                const cleanKey = item.filename.replace('.jpeg', '').toLowerCase().replace(/[_]/g, ' ');
+                const cleanKey = item.filename.replace('.jpg', '').toLowerCase().replace(/[_]/g, ' ');
                 if (text.includes(cleanKey) || cleanKey.split(' ').some(part => part.length > 2 && text.includes(part))) {
                     return { filename: item.filename, category: item.category };
                 }
             }
-            return { filename: "read books.jpeg", category: "daily" };
+            return { filename: "read_books.jpg", category: "daily" };
         }
 
         const encouragementPhrases = [
@@ -641,7 +641,6 @@
                     const rareClass = item.isRare ? 'rare-card-glow' : '';
                     const rareBadge = item.isRare ? '<span style="font-size: 7px; color: #ffd700; font-weight: 600;">✦ 稀有金卡</span>' : '';
 
-                    // 🌟 藝廊優化：完全拔除檔案名稱，只顯示編號與精緻卡片
                     if (isUnlocked) {
                         html += `
                             <div onclick="openModal('images/${item.filename}', '夜色圖卡 #${index+1} ${item.isRare ? '【✨ 重大事項稀有金卡】' : ''}')" class="${rareClass}" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,181,176,0.3); border-radius: 12px; padding: 6px; cursor: pointer; text-align: center; height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;">
@@ -746,7 +745,7 @@
             });
 
             appState.tempInputText = "";
-            saveState(); // 🌟 每次送出自動永久保存到 localStorage
+            saveState();
             goTo('step2');
         }
 
@@ -759,7 +758,7 @@
                 openModal(`images/${finishedTask.img}`, `${randomPhrase}\n\n已完成：「${finishedTask.text}」`);
             }
             
-            saveState(); // 🌟 勾選狀態變更同步保存
+            saveState();
             goTo('morning');
         }
 

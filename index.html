@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 連結 PWA 配置文件 -->
+<link rel="manifest" href="manifest.json">
+<!-- 讓 iOS (Safari) 也能支援全螢幕桌面應用 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VERA">
+<link rel="apple-touch-icon" href="icon-192.png">
+    <title>VERA - Nightly Sanctuary</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #0e0e0e;
+            color: #f2f2ef;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .phone-frame {
+            width: 100%;
+            max-width: 390px;
+            height: 800px;
+            background-color: #161615;
+            border-radius: 44px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.5s ease;
+        }
+        .phone-frame.dim-mode {
+            background-color: #050505 !important;
+        }
+        .phone-frame.dim-mode .card,
+        .phone-frame.dim-mode div[style*="background"] {
+            background-color: rgba(255, 255, 255, 0.01) !important;
+            border-color: rgba(255, 255, 255, 0.04) !important;
+        }
+        .phone-frame.dim-mode p,
+        .phone-frame.dim-mode h3 {
+            opacity: 0.6;
+        }
+
+        .header {
+            padding: 24px 28px 12px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+        .footer {
+            padding: 16px 28px 28px 28px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: linear-gradient(to top, #161615 60%, rgba(22,22,21,0));
+            z-index: 10;
+        }
+        .footer button {
+            background: none;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 9px;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        .footer button.active, .footer button:hover { color: #d4b5b0; }
+        .footer button span.icon { font-size: 15px; margin-bottom: 4px; }
+        
+        .content {
+            flex: 1;
+            padding: 12px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 24px;
+            border-radius: 28px;
+            border: 1px solid rgba(212, 181, 176, 0.15);
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background-color: #d4b5b0;
+            color: #161615;
+            border: none;
+            border-radius: 18px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.95; transform: scale(0.99); }
+        
+        .text-input-box {
+            width: 100%;
+            height: 110px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 181, 176, 0.2);
+            border-radius: 16px;
+            padding: 14px;
+            color: #f2f2ef;
+            font-size: 13px;
+            resize: none;
+            outline: none;
+            font-family: inherit;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .text-input-box:focus { border-color: rgba(212, 181, 176, 0.5); }
+
+        #image-modal {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(15px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #image-modal img {
+            max-width: 85%;
+            max-height: 320px;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 181, 176, 0.4);
+            margin-bottom: 16px;
+            object-fit: contain;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        /* 黃金流光稀有卡邊框特效 */
+        .rare-card-glow {
+            border: 1px solid rgba(255, 215, 0, 0.7) !important;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255,215,0,0.06) 0%, rgba(255,255,255,0.02) 100%);
+        }
+
+        @keyframes softBreathing {
+            0%, 100% { transform: scale(1); opacity: 0.6; box-shadow: 0 0 15px rgba(212,181,176,0.1); }
+            50% { transform: scale(1.18); opacity: 1; box-shadow: 0 0 35px rgba(212,181,176,0.25); }
+        }
+        .breathing-circle-sync { animation: softBreathing 8s infinite ease-in-out; }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame" id="phone-frame">
+        <div class="header">
+            <span>23:45</span>
+            <span style="color: #d4b5b0; font-weight: 500; letter-spacing: 3px;">VERA</span>
+            <div>
+                <button onclick="toggleDimMode()" id="dim-btn" style="background:none; border: 1px solid rgba(212,181,176,0.3); color: #d4b5b0; padding: 2px 6px; border-radius: 6px; font-size: 9px; cursor: pointer; margin-right: 8px;">護眼暗黑</button>
+                <span id="status-text">SANCTUARY</span>
+            </div>
+        </div>
+
+        <div id="screen" class="content"></div>
+
+        <div id="image-modal">
+            <img id="modal-img" src="" alt="Zoomed">
+            <p id="modal-caption" style="font-size: 13px; color: #f2f2ef; letter-spacing: 1px; margin-bottom: 16px; line-height: 1.7; white-space: pre-wrap; font-family: Georgia, serif;"></p>
+            <span style="font-size: 10px; color: #888; letter-spacing: 1px;">（點擊任意處關閉放大）</span>
+        </div>
+
+        <div class="footer" id="app-footer" style="display: none;">
+            <button id="nav-quote" onclick="goTo('quote')"><span class="icon">✧</span>療癒心棧</button>
+            <button id="nav-step1" onclick="goTo('step1')"><span class="icon">✎</span>卸載</button>
+            <button id="nav-step2" onclick="goTo('step2')"><span class="icon">☾</span>助眠</button>
+            <button id="nav-vault" onclick="goTo('vault')"><span class="icon">□</span>集郵簿</button>
+            <button id="nav-morning" onclick="goTo('morning')"><span class="icon">☼</span>晨光</button>
+        </div>
+    </div>
+
+    <script>
+        let audioCtx = null;
+        let noiseNode = null;
+        let melodyInterval = null;
+        let gainNode = null;
+        let isSoundPlaying = true;
+        let isDimMode = false;
+        let currentVaultCategory = 'all'; 
+        let breathTextInterval = null;
+
+        function initAudio() {
+            try {
+                if (!audioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    audioCtx = new AudioContextClass();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            } catch(e) {}
+        }
+
+        function playSoundscape() {
+            initAudio();
+            stopSoundscape();
+            if (!isSoundPlaying || !audioCtx) return;
+
+            try {
+                const bufferSize = audioCtx.sampleRate * 2;
+                const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = (Math.random() * 2 - 1) * 0.4;
+                }
+
+                noiseNode = audioCtx.createBufferSource();
+                noiseNode.buffer = noiseBuffer;
+                noiseNode.loop = true;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 320;
+                filter.Q.value = 1.0;
+
+                gainNode = audioCtx.createGain();
+                gainNode.gain.setValueAtTime(0.04, audioCtx.currentTime);
+
+                noiseNode.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                noiseNode.start();
+
+                const pianoNotes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23];
+                melodyInterval = setInterval(() => {
+                    if (!isSoundPlaying || !audioCtx) return;
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
+                    
+                    const osc = audioCtx.createOscillator();
+                    const noteGain = audioCtx.createGain();
+                    
+                    const randomFreq = pianoNotes[Math.floor(Math.random() * pianoNotes.length)];
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(randomFreq, audioCtx.currentTime);
+
+                    noteGain.gain.setValueAtTime(0, audioCtx.currentTime);
+                    noteGain.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 1.0);
+                    noteGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 4.5);
+
+                    osc.connect(noteGain);
+                    noteGain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 5.0);
+                }, 3800);
+            } catch(e) {}
+        }
+
+        function stopSoundscape() {
+            if (noiseNode) {
+                try { noiseNode.stop(); noiseNode.disconnect(); } catch(e) {}
+                noiseNode = null;
+            }
+            if (melodyInterval) {
+                clearInterval(melodyInterval);
+                melodyInterval = null;
+            }
+        }
+
+        function toggleSoundscape() {
+            isSoundPlaying = !isSoundPlaying;
+            const toggleBtn = document.getElementById('sound-toggle-btn');
+            const soundLabel = document.getElementById('sound-label');
+            if (isSoundPlaying) {
+                playSoundscape();
+                if(toggleBtn) toggleBtn.innerText = "關閉環境音";
+                if(soundLabel) soundLabel.innerText = "🎵 療癒鋼琴與流光水聲";
+            } else {
+                stopSoundscape();
+                if(toggleBtn) toggleBtn.innerText = "開啟環境音";
+                if(soundLabel) soundLabel.innerText = "🎵 環境音已關閉";
+            }
+        }
+
+        function toggleDimMode() {
+            isDimMode = !isDimMode;
+            const frame = document.getElementById('phone-frame');
+            const btn = document.getElementById('dim-btn');
+            if (isDimMode) {
+                frame.classList.add('dim-mode');
+                btn.innerText = "標準模式";
+            } else {
+                frame.classList.remove('dim-mode');
+                btn.innerText = "護眼暗黑";
+            }
+        }
+
+        const sanctuaryQuotes = [
+            "今天的擔憂已經夠多了，夜深了，請允許自己把行李先放下。",
+            "那些還沒發生的最壞假設，不需要你在今晚獨自承擔。",
+            "焦慮的時候，閉上眼睛聽聽自己的呼吸，它一直在這裡陪你。",
+            "允許生活有短暫的失控，這是緊繃的你正在學會放過自己。",
+            "把肩膀的緊繃鬆開一點，世界不會因為你今晚停下而崩塌。"
+        ];
+
+        const imageDatabase = [
+            { filename: "3_o_clock.jpeg", category: "daily", keywords: ["三點", "下午茶", "3點", "休息"], isRare: false },
+            { filename: "back_up.jpeg", category: "work", keywords: ["備份", "backup", "資料", "存檔"], isRare: false },
+            { filename: "bills.jpeg", category: "daily", keywords: ["帳單", "交水電", "交租", "找數", "使費"], isRare: false },
+            { filename: "call_somebody.jpeg", category: "daily", keywords: ["打電話", "打畀", "聯絡", "傾電話", "覆電"], isRare: false },
+            { filename: "cardstatement.jpeg", category: "daily", keywords: ["信用卡", "卡數", "statement", "找卡數", "欠款"], isRare: true },
+            { filename: "collect_online_shopping.jpeg", category: "daily", keywords: ["取件", "收網購", "攞包裹", "速遞", "順豐"], isRare: false },
+            { filename: "confirm_flight_ticket.jpeg", category: "travel", keywords: ["機票", "確認機票", "航班", "旅行"], isRare: true },
+            { filename: "contract.jpeg", category: "work", keywords: ["合約", "簽約", "合約文件", "文件"], isRare: true },
+            { filename: "festival_in_japan.jpeg", category: "travel", keywords: ["日本", "祭典", "旅行", "慶典"], isRare: false },
+            { filename: "fill_aroma_diffuser.jpeg", category: "daily", keywords: ["擴香", "香薰", "精油", "加濕器"], isRare: false },
+            { filename: "first_aid_box.jpeg", category: "misc", keywords: ["急救", "藥箱", "藥物", "膠布"], isRare: false },
+            { filename: "grocery.jpeg", category: "daily", keywords: ["買菜", "超市", "買東西", "購物", "買餸", "超級市場"], isRare: false },
+            { filename: "gym.jpeg", category: "daily", keywords: ["運動", "健身", "跑步", "鍛鍊", "gym"], isRare: false },
+            { filename: "hair_cut.jpeg", category: "daily", keywords: ["剪髮", "剪頭髮", "理髮", "整頭髮"], isRare: false },
+            { filename: "handover_notes.jpeg", category: "work", keywords: ["交接", "交接筆記", "handover", "筆記"], isRare: false },
+            { filename: "hang clothes.jpeg", category: "daily", keywords: ["晾衫", "曬衣服", "洗衣服", "收衫"], isRare: false },
+            { filename: "hiking.jpeg", category: "travel", keywords: ["行山", "爬山", "戶外", "郊遊"], isRare: false },
+            { filename: "hospital appointment.jpeg", category: "misc", keywords: ["看醫生", "醫院", "診所", "覆診", "醫生", "體檢"], isRare: true },
+            { filename: "inflight window.jpeg", category: "travel", keywords: ["飛機", "窗戶", "搭飛機", "航程"], isRare: false },
+            { filename: "insurance renewal.jpeg", category: "misc", keywords: ["保險", "續保", "保單"], isRare: false },
+            { filename: "iron shirt.jpeg", category: "daily", keywords: ["燙衫", "熨衣", "熨衫", "恤衫"], isRare: false },
+            { filename: "make reservation.jpeg", category: "daily", keywords: ["訂位", "預約", "訂桌", "book位"], isRare: false },
+            { filename: "manage charging cable.jpeg", category: "misc", keywords: ["充電線", "整理電線", "線材", "收拾"], isRare: false },
+            { filename: "meal table booking.jpeg", category: "daily", keywords: ["訂餐廳", "食飯", "聚餐", "飯局"], isRare: false },
+            { filename: "meeting.jpeg", category: "work", keywords: ["開會", "會議", "見客戶", "談判", "匯報"], isRare: false },
+            { filename: "night message.jpeg", category: "work", keywords: ["夜間訊息", "覆訊息", "短訊", "message"], isRare: false },
+            { filename: "online study.jpeg", category: "work", keywords: ["上課", "學習", "網課", "讀書", "溫書", "course"], isRare: false },
+            { filename: "parcel.jpeg", category: "daily", keywords: ["包裹", "快遞", "寄信", "速遞"], isRare: false },
+            { filename: "photo.jpeg", category: "misc", keywords: ["相片", "照片", "拍照", "沖相"], isRare: false },
+            { filename: "Pick up kids.jpeg", category: "daily", keywords: ["接小孩", "接放學", "接小朋友", "放學"], isRare: false },
+            { filename: "plan the weekend.jpeg", category: "travel", keywords: ["計畫週末", "週末", "行程", "放假"], isRare: false },
+            { filename: "plants.jpeg", category: "daily", keywords: ["植物", "園藝", "花草"], isRare: false },
+            { filename: "plumber.jpeg", category: "misc", keywords: ["水電", "修理", "維修", "師傅", "冷氣"], isRare: false },
+            { filename: "prepare gift.jpeg", category: "misc", keywords: ["準備禮物", "買禮物", "送禮"], isRare: false },
+            { filename: "presentation.jpeg", category: "work", keywords: ["簡報", "報告", "演講", "ppt", "slides"], isRare: true },
+            { filename: "raining night with a cup of tea.jpeg", category: "daily", keywords: ["雨夜", "茶", "下雨", "喝茶"], isRare: false },
+            { filename: "read books.jpeg", category: "daily", keywords: ["看書", "閱讀", "讀書", "睇書"], isRare: false },
+            { filename: "recharge octopus.jpeg", category: "travel", keywords: ["八達通", "增值", "八達通卡"], isRare: false },
+            { filename: "recharge travel card.jpeg", category: "travel", keywords: ["旅遊卡", "車票", "八達通", "交通卡"], isRare: false },
+            { filename: "Reporting.jpeg", category: "work", keywords: ["工作報告", "reporting", "交功課", "總結"], isRare: false },
+            { filename: "return book.jpeg", category: "daily", keywords: ["還書", "圖書館", "借書"], isRare: false },
+            { filename: "salad.jpeg", category: "daily", keywords: ["沙拉", "食齋", "輕食", "健康餐"], isRare: false },
+            { filename: "scatch.jpeg", category: "work", keywords: ["草稿", "速寫", "塗鴉", "筆記"], isRare: false },
+            { filename: "send happy birthday message.jpeg", category: "misc", keywords: ["生日", "慶祝", "祝福", "生日快樂"], isRare: false },
+            { filename: "snowing night in japan.jpeg", category: "travel", keywords: ["下雪", "雪夜", "日本雪景", "雪"], isRare: false },
+            { filename: "Study.jpeg", category: "work", keywords: ["溫書", "K書", "研讀", "筆記"], isRare: false },
+            { filename: "supplement.jpeg", category: "misc", keywords: ["保健品", "維他命", "食藥", "營養品"], isRare: false },
+            { filename: "tidy bedings.jpeg", category: "daily", keywords: ["整理床鋪", "執床", "床單"], isRare: false },
+            { filename: "tidy up desktop.jpeg", category: "work", keywords: ["整理桌面", "執檯", "桌面"], isRare: false },
+            { filename: "umbrella.jpeg", category: "daily", keywords: ["雨傘", "帶遮", "下雨"], isRare: false },
+            { filename: "utility bills.jpeg", category: "daily", keywords: ["交水電", "帳單", "差餉", "交租"], isRare: false },
+            { filename: "vitamin C supplement.jpeg", category: "misc", keywords: ["維他命c", "維生素", "保健食品"], isRare: false },
+            { filename: "water plants.jpeg", category: "daily", keywords: ["澆水", "淋花", "植物澆水"], isRare: false },
+            { filename: "writer block.jpeg", category: "work", keywords: ["寫作瓶頸", "靈感", "寫文章", "創作"], isRare: false }
+        ];
+
+        function matchImageAndCategory(taskText) {
+            if (!taskText) return { filename: "read books.jpeg", category: "daily" };
+            const text = taskText.toLowerCase();
+            for (let item of imageDatabase) {
+                if (item.keywords) {
+                    for (let word of item.keywords) {
+                        if (text.includes(word)) {
+                            return { filename: item.filename, category: item.category };
+                        }
+                    }
+                }
+            }
+            for (let item of imageDatabase) {
+                const cleanKey = item.filename.replace('.jpeg', '').toLowerCase().replace(/[_]/g, ' ');
+                if (text.includes(cleanKey) || cleanKey.split(' ').some(part => part.length > 2 && text.includes(part))) {
+                    return { filename: item.filename, category: item.category };
+                }
+            }
+            return { filename: "read books.jpeg", category: "daily" };
+        }
+
+        const encouragementPhrases = [
+            "✨ 太棒了！完成了一項重要的心事，給自己一個溫柔的微笑吧。",
+            "☕ 每剔除一項，內心就多了一分清爽，你做得很好。",
+            "🌿 步伐不在快，而在於前進。為自己的每一步喝彩。",
+            "💫 陽光正好，微風不燥，把完成的事好好收進回憶裡。",
+            "🕊️ 卸下了一件重擔，今天的你比昨天更輕盈了。"
+        ];
+
+        // 🌟 核心狀態與 localStorage 永久持久化同步
+        const appState = {
+            unlockedImages: JSON.parse(localStorage.getItem('vera_unlockedImages')) || [],
+            taskList: JSON.parse(localStorage.getItem('vera_taskList')) || [],
+            introStep: 1,
+            tempInputText: "",
+            currentQuoteIndex: new Date().getDate() % sanctuaryQuotes.length
+        };
+
+        function saveState() {
+            try {
+                localStorage.setItem('vera_unlockedImages', JSON.stringify(appState.unlockedImages));
+                localStorage.setItem('vera_taskList', JSON.stringify(appState.taskList));
+            } catch(e) {}
+        }
+
+        function updateNav(activeName) {
+            ['quote', 'step1', 'step2', 'vault', 'morning'].forEach(name => {
+                const btn = document.getElementById('nav-' + name);
+                if(btn) {
+                    if(name === activeName) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                }
+            });
+        }
+
+        function setVaultCategory(category) {
+            currentVaultCategory = category;
+            goTo('vault');
+        }
+
+        const quickTaskPool = [
+            "明天開會簡報", "處理信用卡帳單", "回覆重要客戶訊息", "買菜與日用品", 
+            "確認機票與飯店", "預約醫生覆診", "整理凌亂辦公桌", "備份公司電腦資料", 
+            "跟進合約簽署", "計畫週末行程", "幫植物澆澆水", "處理工作報告"
+        ];
+
+        let currentRandomQuickTasks = [];
+
+        function generateRandomQuickTasks() {
+            const shuffled = [...quickTaskPool].sort(() => 0.5 - Math.random());
+            currentRandomQuickTasks = shuffled.slice(0, 4);
+        }
+
+        function appendQuickTask(text) {
+            const box = document.getElementById('user-task-input');
+            if(box) {
+                if(box.value.trim() !== "") {
+                    box.value += "\n" + text;
+                } else {
+                    box.value = text;
+                }
+            }
+        }
+
+        function startBreathCycle() {
+            if (breathTextInterval) clearInterval(breathTextInterval);
+            const statusEl = document.getElementById('breath-instruction-text');
+            if (!statusEl) return;
+
+            const runPhase = () => {
+                if (!document.getElementById('breath-instruction-text')) return;
+                statusEl.innerText = "【 鼻腔緩慢吸氣... 4s 】";
+                setTimeout(() => {
+                    if (document.getElementById('breath-instruction-text')) {
+                        statusEl.innerText = "【 溫柔屏住氣息... 7s 】";
+                    }
+                }, 4000);
+                setTimeout(() => {
+                    if (document.getElementById('breath-instruction-text')) {
+                        statusEl.innerText = "【 從口中細細吐氣... 8s 】";
+                    }
+                }, 11000);
+            };
+
+            runPhase();
+            breathTextInterval = setInterval(runPhase, 19000);
+        }
+
+        function goTo(screenName) {
+            const screen = document.getElementById('screen');
+            const phoneBg = document.getElementById('phone-frame');
+            const footer = document.getElementById('app-footer');
+            if (!screen) return;
+            screen.innerHTML = "";
+
+            if (breathTextInterval) {
+                clearInterval(breathTextInterval);
+                breathTextInterval = null;
+            }
+
+            if (screenName === 'intro') {
+                if(footer) footer.style.display = 'none';
+                stopSoundscape();
+            } else {
+                if(footer) footer.style.display = 'flex';
+                updateNav(screenName);
+            }
+
+            if (screenName === 'step1') {
+                generateRandomQuickTasks();
+            }
+
+            if (screenName === 'step2') {
+                if(phoneBg) phoneBg.style.backgroundColor = isDimMode ? "#050505" : "#080808";
+                playSoundscape();
+                setTimeout(startBreathCycle, 100);
+            } else {
+                if(phoneBg) phoneBg.style.backgroundColor = isDimMode ? "#050505" : "#161615";
+                if(screenName !== 'step2') stopSoundscape();
+            }
+
+            if (screenName === 'intro') {
+                let introContent = "";
+                if (appState.introStep === 1) {
+                    introContent = `
+                        <div style="text-align: center;">
+                            <p style="font-size: 10px; letter-spacing: 4px; color: #777; margin-bottom: 24px;">01 / 03</p>
+                            <h2 style="font-size: 24px; font-weight: 300; line-height: 1.5; margin-bottom: 20px; color: #f2f2ef; font-family: Georgia, serif;">深夜的腦袋<br>裝滿未完的事</h2>
+                            <p style="font-size: 13px; color: #888; line-height: 1.8; margin-bottom: 40px; font-weight: 300;">大腦為了怕遺忘而反覆運算，使人難以入眠。</p>
+                            <button class="btn-primary" onclick="nextIntro()">繼續 ⟶</button>
+                        </div>
+                    `;
+                } else if (appState.introStep === 2) {
+                    introContent = `
+                        <div style="text-align: center;">
+                            <p style="font-size: 10px; letter-spacing: 4px; color: #777; margin-bottom: 24px;">02 / 03</p>
+                            <h2 style="font-size: 24px; font-weight: 300; line-height: 1.5; margin-bottom: 20px; color: #f2f2ef; font-family: Georgia, serif;">思緒轉化為<br>專屬「夜色圖卡」</h2>
+                            <p style="font-size: 13px; color: #888; line-height: 1.8; margin-bottom: 40px; font-weight: 300;">卸載後文字緩緩消失，並在集郵簿中解鎖精美夜色圖卡。</p>
+                            <button class="btn-primary" onclick="nextIntro()">繼續 ⟶</button>
+                        </div>
+                    `;
+                } else if (appState.introStep === 3) {
+                    introContent = `
+                        <div style="text-align: center;">
+                            <p style="font-size: 10px; letter-spacing: 4px; color: #777; margin-bottom: 24px;">03 / 03</p>
+                            <h2 style="font-size: 24px; font-weight: 300; line-height: 1.5; margin-bottom: 20px; color: #f2f2ef; font-family: Georgia, serif;">一夜好眠<br>從容迎接早晨</h2>
+                            <p style="font-size: 13px; color: #888; line-height: 1.8; margin-bottom: 40px; font-weight: 300;">把世界交還給黑夜，早晨歸納已完成與進行中事項。</p>
+                            <button class="btn-primary" onclick="finishIntro()">開啟寧靜之旅 ✧</button>
+                        </div>
+                    `;
+                }
+                screen.innerHTML = introContent;
+            } else if (screenName === 'quote') {
+                const currentQuote = sanctuaryQuotes[appState.currentQuoteIndex];
+                screen.innerHTML = `
+                    <div style="text-align: center;">
+                        <p style="font-size: 10px; letter-spacing: 3px; color: #666; margin-bottom: 16px;">SANCTUARY REFLECTION</p>
+                        <div class="card">
+                            <p style="font-size: 16px; line-height: 1.9; color: #f2f2ef; font-family: Georgia, serif; font-weight: 300;">
+                                “${currentQuote}”
+                            </p>
+                        </div>
+                        <button class="btn-primary" onclick="goTo('step1')">開始今晚的思緒卸載</button>
+                    </div>
+                `;
+            } else if (screenName === 'step1') {
+                let quickButtonsHtml = '';
+                currentRandomQuickTasks.forEach(task => {
+                    quickButtonsHtml += `<button onclick="appendQuickTask('${task}')" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 4px 8px; border-radius: 6px; font-size: 9px; cursor: pointer;">+ ${task}</button>`;
+                });
+
+                screen.innerHTML = `
+                    <div>
+                        <p style="font-size: 10px; letter-spacing: 3px; color: #666; margin-bottom: 4px; text-align: center;">COGNITIVE OFFLOADING</p>
+                        <h3 style="font-size: 17px; font-weight: 300; margin-bottom: 8px; color: #f2f2ef; font-family: Georgia, serif; text-align: center;">寫下今晚掛記的事</h3>
+                        <p style="font-size: 10px; color: #888; margin-bottom: 12px; text-align: center;">每行輸入一項，卸載重大待辦可解鎖稀有金卡</p>
+
+                        <textarea id="user-task-input" class="text-input-box" placeholder="例如：&#10;處理信用卡帳單&#10;明天開會簡報">${appState.tempInputText}</textarea>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <p style="font-size: 9px; color: #777; margin-bottom: 4px; text-align: left;">隨機心事推薦（點擊快速帶入）：</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                ${quickButtonsHtml}
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" style="margin-top:0;" onclick="submitTextTask()">將思緒轉化為夜色圖卡 ✧</button>
+                    </div>
+                `;
+            } else if (screenName === 'step2') {
+                screen.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="width: 84px; height: 84px; margin: 10px auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(212,181,176,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;" class="breathing-circle-sync">☾</div>
+                        
+                        <p id="breath-instruction-text" style="font-size: 13px; font-weight: 300; margin-bottom: 4px; color: #d4b5b0; font-family: Georgia, serif; letter-spacing: 1px;">【 準備開始 4-7-8 呼吸 】</p>
+                        <p style="font-size: 10px; color: #888; margin-bottom: 14px;">讓視線與呼吸隨光暈緩慢收放，切斷交感神經</p>
+
+                        <div style="background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); font-size: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: #aaa;" id="sound-label">${isSoundPlaying ? "🎵 療癒鋼琴與流光水聲" : "🎵 環境音已關閉"}</span>
+                            <button id="sound-toggle-btn" onclick="toggleSoundscape()" style="background: rgba(212,181,176,0.15); border: none; color: #d4b5b0; padding: 4px 8px; border-radius: 6px; font-size: 9px; cursor: pointer;">${isSoundPlaying ? "關閉環境音" : "開啟環境音"}</button>
+                        </div>
+
+                        <div style="background: rgba(212,181,176,0.04); border: 1px solid rgba(212,181,176,0.15); border-radius: 12px; padding: 10px; margin-bottom: 12px; text-align: left;">
+                            <p style="font-size: 9px; color: #d4b5b0; font-weight: 500; margin-bottom: 2px;">💡 睡眠醫學小貼士</p>
+                            <p style="font-size: 9px; color: #aaa; line-height: 1.4;">若躺在床上 20 分鐘仍未入眠，請溫柔地離開床鋪，翻閱集郵簿或聽水聲。</p>
+                        </div>
+
+                        <button class="btn-primary" style="margin-top: 0; padding: 10px; background-color: transparent; color: #d4b5b0; border: 1px solid rgba(212,181,176,0.4);" onclick="goTo('morning')">結束冥想，進入早晨 ✧</button>
+                    </div>
+                `;
+            } else if (screenName === 'vault') {
+                const totalCount = imageDatabase.length;
+                const unlockedCount = appState.unlockedImages.length;
+                
+                let html = `<h3 style="font-size: 18px; font-weight: 300; margin-bottom: 2px; color: #f2f2ef; font-family: Georgia, serif;">心靈集郵簿</h3>`;
+                html += `<p style="font-size: 10px; color: #d4b5b0; margin-bottom: 10px; letter-spacing: 1px;">已收集 ${unlockedCount} / ${totalCount} 張夜色圖卡</p>`;
+                
+                const categories = [
+                    { id: 'all', name: '全部' },
+                    { id: 'daily', name: '日常' },
+                    { id: 'work', name: '工作' },
+                    { id: 'travel', name: '旅行' },
+                    { id: 'misc', name: '雜項' }
+                ];
+
+                html += `<div style="display: flex; justify-content: center; gap: 6px; margin-bottom: 10px;">`;
+                categories.forEach(cat => {
+                    const isActive = currentVaultCategory === cat.id;
+                    html += `<button onclick="setVaultCategory('${cat.id}')" style="background: ${isActive ? '#d4b5b0' : 'rgba(255,255,255,0.03)'}; color: ${isActive ? '#161615' : '#888'}; border: 1px solid rgba(212,181,176,0.2); padding: 4px 10px; border-radius: 8px; font-size: 9px; cursor: pointer; font-weight: ${isActive ? '600' : '400'};">${cat.name}</button>`;
+                });
+                html += `</div>`;
+
+                html += '<div style="max-height: 280px; overflow-y: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding-right: 4px;">';
+
+                imageDatabase.forEach((item, index) => {
+                    if (currentVaultCategory !== 'all' && item.category !== currentVaultCategory) return;
+
+                    const isUnlocked = appState.unlockedImages.includes(item.filename);
+                    const rareClass = item.isRare ? 'rare-card-glow' : '';
+                    const rareBadge = item.isRare ? '<span style="font-size: 7px; color: #ffd700; font-weight: 600;">✦ 稀有金卡</span>' : '';
+
+                    // 🌟 藝廊優化：完全拔除檔案名稱，只顯示編號與精緻卡片
+                    if (isUnlocked) {
+                        html += `
+                            <div onclick="openModal('images/${item.filename}', '夜色圖卡 #${index+1} ${item.isRare ? '【✨ 重大事項稀有金卡】' : ''}')" class="${rareClass}" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,181,176,0.3); border-radius: 12px; padding: 6px; cursor: pointer; text-align: center; height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;">
+                                <img src="images/${item.filename}" style="width: 100%; height: 48px; object-fit: cover; border-radius: 6px; margin-bottom: 2px;" alt="夜色圖卡">
+                                <div style="display: flex; justify-content: space-between; width: 100%; padding: 0 2px;">
+                                    <span style="font-size: 8px; color: #aaa;">#${index+1 < 10 ? '0' + (index+1) : index+1}</span>
+                                    ${rareBadge}
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        html += `
+                            <div style="background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.08); border-radius: 12px; padding: 6px; text-align: center; height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <span style="font-size: 14px; opacity: 0.2; margin-bottom: 2px;">${item.isRare ? '✦' : '□'}</span>
+                                <span style="font-size: 9px; color: ${item.isRare ? '#ffd700' : '#555'};">#${index+1 < 10 ? '0' + (index+1) : index+1} 待解鎖</span>
+                            </div>
+                        `;
+                    }
+                });
+
+                html += '</div>';
+                screen.innerHTML = html;
+            } else if (screenName === 'morning') {
+                let activeTasksHtml = "";
+                let doneTasksHtml = "";
+
+                const activeTasks = appState.taskList.filter(t => !t.done);
+                const doneTasks = appState.taskList.filter(t => t.done);
+
+                if (activeTasks.length > 0) {
+                    activeTasks.forEach((taskObj) => {
+                        const realIndex = appState.taskList.indexOf(taskObj);
+                        activeTasksHtml += `
+                            <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); padding: 10px 12px; border-radius: 14px; margin-bottom: 8px; border: 1px solid rgba(212,181,176,0.15);">
+                                <img src="images/${taskObj.img}" onclick="openModal('images/${taskObj.img}', '${taskObj.text}')" style="width: 38px; height: 38px; object-fit: cover; border-radius: 8px; flex-shrink: 0; cursor: pointer; border: 1px solid rgba(212,181,176,0.2);" title="點擊放大" alt="夜色圖卡">
+                                <div style="flex: 1; text-align: left; display: flex; align-items: center;">
+                                    <input type="checkbox" onchange="toggleTask(${realIndex})" style="accent-color: #d4b5b0; margin-right: 8px; width: 14px; height: 14px; cursor: pointer;">
+                                    <span style="color: #ddd; font-size: 12px;">${taskObj.text}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    activeTasksHtml = '<p style="font-size: 11px; color: #666; text-align: center; padding: 10px 0;">目前沒有進行中的待辦事項。</p>';
+                }
+
+                if (doneTasks.length > 0) {
+                    doneTasks.forEach((taskObj) => {
+                        const realIndex = appState.taskList.indexOf(taskObj);
+                        doneTasksHtml += `
+                            <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.01); padding: 8px 12px; border-radius: 14px; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.05); opacity: 0.6;">
+                                <img src="images/${taskObj.img}" onclick="openModal('images/${taskObj.img}', '${taskObj.text}')" style="width: 32px; height: 32px; object-fit: cover; border-radius: 6px; flex-shrink: 0; cursor: pointer;" title="點擊放大" alt="夜色圖卡">
+                                <div style="flex: 1; text-align: left; display: flex; align-items: center;">
+                                    <input type="checkbox" checked onchange="toggleTask(${realIndex})" style="accent-color: #d4b5b0; margin-right: 8px; width: 14px; height: 14px; cursor: pointer;" title="改回進行中">
+                                    <span style="color: #888; font-size: 11px; text-decoration: line-through;">${taskObj.text}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                screen.innerHTML = `
+                    <div style="text-align: center;">
+                        <p style="font-size: 10px; letter-spacing: 3px; color: #666; margin-bottom: 4px;">MORNING GLOW</p>
+                        <h3 style="font-size: 18px; font-weight: 300; margin-bottom: 10px; color: #f2f2ef; font-family: Georgia, serif;">晨光報告</h3>
+                        
+                        <div style="text-align: left; max-height: 280px; overflow-y: auto; padding-right: 4px;">
+                            <p style="font-size: 10px; color: #d4b5b0; letter-spacing: 1px; margin-bottom: 6px;">進行中項目</p>
+                            ${activeTasksHtml}
+                            
+                            ${doneTasks.length > 0 ? `
+                                <p style="font-size: 10px; color: #777; letter-spacing: 1px; margin: 12px 0 6px 0;">已完成項目（點擊取消勾選可改回）</p>
+                                ${doneTasksHtml}
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function nextIntro() { appState.introStep++; goTo('intro'); }
+        function finishIntro() { goTo('quote'); }
+        
+        function submitTextTask() {
+            const inputBox = document.getElementById('user-task-input');
+            const inputVal = inputBox ? inputBox.value.trim() : "";
+            if(!inputVal) {
+                alert("請先寫下今晚掛記的事 ✨");
+                return;
+            }
+
+            const lines = inputVal.split('\n').filter(t => t.trim() !== "");
+            
+            appState.taskList = lines.map(line => {
+                const matchResult = matchImageAndCategory(line);
+                const matchedFilename = matchResult.filename;
+
+                if (!appState.unlockedImages.includes(matchedFilename)) {
+                    appState.unlockedImages.push(matchedFilename);
+                }
+                return { text: line, img: matchedFilename, done: false };
+            });
+
+            appState.tempInputText = "";
+            saveState(); // 🌟 每次送出自動永久保存到 localStorage
+            goTo('step2');
+        }
+
+        function toggleTask(index) {
+            appState.taskList[index].done = !appState.taskList[index].done;
+            const finishedTask = appState.taskList[index];
+            
+            if (finishedTask.done) {
+                const randomPhrase = encouragementPhrases[Math.floor(Math.random() * encouragementPhrases.length)];
+                openModal(`images/${finishedTask.img}`, `${randomPhrase}\n\n已完成：「${finishedTask.text}」`);
+            }
+            
+            saveState(); // 🌟 勾選狀態變更同步保存
+            goTo('morning');
+        }
+
+        function openModal(imgSrc, captionText) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalCaption = document.getElementById('modal-caption');
+            if(!modal) return;
+            
+            if(modalImg) modalImg.src = imgSrc;
+            if(modalCaption) modalCaption.innerText = captionText;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            if(modal) modal.style.display = 'none';
+        }
+
+        const modalEl = document.getElementById('image-modal');
+        if(modalEl) modalEl.addEventListener('click', closeModal);
+
+        goTo('intro');
+    </script>
+</body>
+</html>

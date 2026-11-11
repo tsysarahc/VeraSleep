@@ -100,33 +100,33 @@
         }
         .btn-primary {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background-color: #d4b5b0;
             color: #161615;
             border: none;
             border-radius: 18px;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
             letter-spacing: 1.5px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 12px;
             transition: transform 0.2s, opacity 0.2s;
         }
         .btn-primary:hover { opacity: 0.95; transform: scale(0.99); }
         
         .text-input-box {
             width: 100%;
-            height: 120px;
+            height: 150px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 181, 176, 0.2);
             border-radius: 16px;
-            padding: 14px;
+            padding: 18px;
             color: #f2f2ef;
-            font-size: 14px;
+            font-size: 18px;
             resize: none;
             outline: none;
             font-family: inherit;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             line-height: 1.6;
         }
         .text-input-box:focus { border-color: rgba(212, 181, 176, 0.5); }
@@ -152,20 +152,6 @@
             margin-bottom: 16px;
             object-fit: contain;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-        }
-
-        /* 城市選擇 Modal */
-        #city-modal {
-            display: none;
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(12px);
-            z-index: 99998;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
         }
 
         .rare-card-glow {
@@ -197,7 +183,7 @@
         <!-- 圖片放大檢視 Modal -->
         <div id="image-modal">
             <img id="modal-img" src="" alt="Zoomed">
-            <p id="modal-caption" style="font-size: 14px; color: #f2f2ef; letter-spacing: 1px; margin-bottom: 16px; line-height: 1.7; white-space: pre-wrap; font-family: Georgia, serif;"></p>
+            <p id="modal-caption" style="font-size: 15px; color: #f2f2ef; letter-spacing: 1px; margin-bottom: 16px; line-height: 1.7; white-space: pre-wrap; font-family: Georgia, serif;"></p>
             <span style="font-size: 11px; color: #888; letter-spacing: 1px;">（點擊任意處關閉）</span>
         </div>
 
@@ -232,7 +218,7 @@
                         fetchWeatherByCoords(position.coords.latitude, position.coords.longitude);
                     },
                     (error) => {
-                        fetchWeatherByCoords(22.3193, 114.1694); // Fallback 座標
+                        fetchWeatherByCoords(22.3193, 114.1694);
                     },
                     { timeout: 10000 }
                 );
@@ -393,227 +379,139 @@
             "那些還沒發生的最壞假設，不需要你在今晚獨自承擔。",
             "焦慮的時候，閉上眼睛聽聽自己的呼吸，它一直在這裡陪你。",
             "允許生活有短暫的失控，這是緊繃的你正在學會放過自己。",
-            "把肩膀的緊繃鬆開一點，世界不會因為你今晚停下而崩塌。",
-            "明天的事，留給明天的去煩惱；今晚的你，只需要好好休息。",
-            "你已經做得夠好了，不需要在深夜向誰證明甚麼。",
-            "睡不著也沒關係，就當作是多出來的安靜屬於你自己的時間。",
-            "把心裡的燈光調暗一點，黑夜會溫柔地接住你所有的疲憊。",
-            "放過那個對自己要求太完美的自己吧，今晚允許不完美。",
-            "每一個失眠的夜晚，都是靈魂在喧囂世界裡給你的獨處溫柔。",
-            "把重擔卸下吧，明天太陽升起時，你會有新的力量。",
-            "不必急著找答案，有些問題在睡一覺後自然會有出路。",
-            "你心裡那些過不去的坎，在漫長的宇宙裡其實都很輕盈。",
-            "給自己一個擁抱，今天辛苦了，真的辛苦了。",
-            "深夜的風是涼的，但你的心可以是被被窩溫暖包覆的。",
-            "停止在大腦裡反覆推演劇本吧，導演現在宣佈今晚劇終。",
-            "你的存在本身就很珍貴，不需要靠完成所有待辦來定義價值。",
-            "聽著滴答的時鐘，那是時間在輕輕哄你入睡。",
-            "把擔憂寫進 VERA 裡了，它們不會跑掉，但你可以安心睡了。",
-            "黑夜不是用來焦慮的，是用來讓萬物沈澱、回歸平靜的。",
-            "允許自己脆弱，允許自己今晚甚麼也不想做。",
-            "呼吸，吸進平靜，吐出所有的焦慮與防備。",
-            "明天醒來又是新的一天，昨天的錯就讓它留在昨天。",
-            "你不需要在所有人都滿意，最重要的是今晚你能安穩睡去。",
-            "閉上眼，想像自己正漂浮在溫柔的星河裡、無重力、很安全。",
-            "心事像手中的沙，抓得越緊越累，不如輕輕放手。",
-            "今晚的月色很美，如果睡不著，就抬頭看看它吧。",
-            "生活總有突如其來的雨，但雨停後一定有晴朗的明天。",
-            "你比想像中更堅強，但也請允許自己偶爾軟弱。",
-            "把手機放下吧，螢幕外的世界會乖乖等你到天亮。",
-            "今夜的夢裡，一定會有你最想去的那片海。",
-            "不用害怕失眠，把這段時間當作跟自己對話的禮物。",
-            "把心裡的雜音調成靜音，只聽見自己的心跳聲。",
-            "你已經走得很遠了，給自己一點掌聲，然後好好休息。",
-            "所有的風雨，到了深夜都化成了窗外溫柔的微風。",
-            "放下對完美的執念，今晚的你值得一個最甜美的夢。",
-            "不必向世界解釋甚麼，此時此刻，安靜就是最好的答案。",
-            "把明天的衣服準備好，把明天的煩惱關在門外。",
-            "你的呼吸很平穩，你的心很安靜，睡意正在慢慢靠近。",
-            "黑夜是大地給予我們的擁抱，別抗拒它，去享受它。",
-            "不管今天過得怎麼樣，它都已經結束了，你自由了。",
-            "試著把注意力放在腳趾上，然後慢慢放鬆，感受身體沉入床鋪。",
-            "心裡裝不下那麼多事時，就要學會倒掉一些垃圾。",
-            "今夜的星空很寬廣，你的煩惱在它面前其實很小很小。",
-            "給自己一個微笑，明天太陽依舊會為你升起。",
-            "不要跟失眠對抗，順其自然，它只是想陪你多聊一會兒。",
-            "卸下防備的盔甲，在這裡，你是絕對安全且被接納的。",
-            "生活不需要時時刻刻都在奔跑，停下來看星星也是一種前進。",
-            "把所有的不甘心和遺憾，都揉進今夜的夜色裡融化掉。",
-            "你是自己最好的避風港，累了就停泊吧。",
-            "當你學會放過自己，全世界的溫柔都會向你靠攏。",
-            "今夜的夢境很甜，入口處寫著『無憂』。",
-            "聽著遠處的車聲或風聲，那是世界在為你哼唱搖籃曲。",
-            "不用去猜測明天會發生甚麼，過好今晚的每一秒就好。",
-            "你流下的每一滴汗水、走過的每一步，都在默默積蓄力量。",
-            "深呼吸，把胸口積壓的鬱悶全部都吐出去。",
-            "今晚的被窩是世界上最溫暖、最安全的城堡。",
-            "把期待放低一點，把幸福感調高一點。",
-            "不管別人怎麼看你，你只需要對得起自己的心。",
-            "黑夜給了我們黑色的眼睛，是用來尋找夢裡的星光的。",
-            "別想了，蓋好被子，世界晚安。",
-            "把不屬於今晚的思緒，通通放進記憶的抽屜裡鎖上。",
-            "你值得擁有一個沒有焦慮、安穩到天亮的夜晚。",
-            "微風穿過窗櫺，帶走你心頭最後一絲煩躁。",
-            "閉上眼睛的瞬間，你就是自己世界的國王。",
-            "讓思緒像天上的雲一樣飄走，不要去追逐它。",
-            "今天過得好也罷，壞也罷，都已經翻篇了。",
-            "你心裡的善良和溫柔，終究會被這個世界溫柔以待。",
-            "不用強迫自己馬上睡著，放輕鬆，享受這份安靜。",
-            "把所有的『如果』和『當初』，都留在夢醒之前。",
-            "深夜的寧靜不是孤獨，而是與自己靈魂深處的重逢。",
-            "你的心靈需要一場大掃除，而現在就是最好的時刻。",
-            "相信我，明天醒來的時候，事情一定會比你想的還要好。",
-            "把雙手放在胸口，感受那裡沉穩而規律的跳動，你還活著，很好。",
-            "世界很大，但此時此刻，你的床就是你的整個宇宙。",
-            "別為了抓不住的東西而焦慮，屬於你的永遠都在。",
-            "今晚的月光穿透窗簾，像一雙溫柔的手撫摸你的額頭。",
-            "把緊咬的牙關鬆開，把緊皺的眉頭撫平，你現在很安全。",
-            "讓自己像一隻貓一樣慵懶地陷進枕頭裡吧。",
-            "所有的焦慮都是紙老虎，在真正的睡眠面前不堪一擊。",
-            "感謝今天努力堅持到現在的自己，你真的做得很好。",
-            "把明天的憂慮留給明天，今晚的月亮不收稅。",
-            "深藍色的夜空裡，藏著無數個溫柔的夢境在等你挑選。",
-            "讓心靈沈入湖底，那裡沒有波瀾，只有絕對的寧靜。",
-            "你不需要完美，你只需要做真實的自己，然後好好睡覺。",
-            "當你學會對自己說『沒關係』，內心就真的沒關係了。",
-            "今晚的夢很長，足夠你把想去的地方都走一遍。",
-            "把孤單化作清風，吹散心頭所有的陰霾。",
-            "不用去證明甚麼，此時的安睡就是對生活最好的回應。",
-            "把疲憊交給床鋪，把夢想交給夜空。",
-            "夜深了，讓思維打個烊，明天請早。",
-            "你是被這座城市、被宇宙、被愛你的人默默守護著的。",
-            "閉上眼睛，數著自己的心跳：一、二、三……慢慢進入夢鄉。",
-            "生活縱然有千般不易，但今晚的睡眠是上天給你的免罪金牌。",
-            "把所有的雜念都關機，重新啟動你的好夢系統。",
-            "今夜無風，今夜無雨，今夜只有滿天星光與安眠。",
-            "不用擔心明天，因為明天的你一定會找到辦法的。",
-            "把眼皮闔上吧，最美好的夢境正在門外等著你推開門。"
+            "把肩膀的緊繃鬆開一點，世界不會因為你今晚停下而崩塌。"
         ];
 
+        // 🌟 完整 79 張圖卡資料庫（涵蓋全部截圖檔案與多語系/口語關鍵字配對）
         const imageDatabase = [
-            { filename: "Clear_sky.jpg", category: "weather", keywords: ["晴天", "晴朗", "好天氣", "clear", "sunny", "fine"], isRare: false },
-            { filename: "cloudy_day.jpg", category: "weather", keywords: ["多雲", "陰天", "cloudy", "overcast"], isRare: false },
-            { filename: "cloudy.jpg", category: "weather", keywords: ["雲層", "灰天", "clouds"], isRare: false },
-            { filename: "heavy_rain.jpg", category: "weather", keywords: ["暴雨", "大雨", "heavy rain", "storm", "downpour"], isRare: true },
-            { filename: "light_rain.jpg", category: "weather", keywords: ["小雨", "毛毛雨", "light rain", "drizzle"], isRare: false },
-            { filename: "lightning.jpg", category: "weather", keywords: ["閃電", "雷暴", "lightning", "thunder"], isRare: true },
-            { filename: "lightning_night.jpg", category: "weather", keywords: ["雷雨夜", "thunderstorm"], isRare: true },
-            { filename: "raining.jpg", category: "weather", keywords: ["下雨", "raining", "rain"], isRare: false },
-            { filename: "rainy.jpg", category: "weather", keywords: ["雨", "rainy"], isRare: false },
-            { filename: "rainy_day.jpg", category: "weather", keywords: ["雨天", "rainy day"], isRare: false },
-            { filename: "snow.jpg", category: "weather", keywords: ["下雪", "雪", "snow", "snowing"], isRare: false },
-            { filename: "sun.jpg", category: "weather", keywords: ["陽光", "sun"], isRare: false },
-            { filename: "sunny.jpg", category: "weather", keywords: ["晴", "sunny"], isRare: false },
-            { filename: "typhoon8.jpg", category: "weather", keywords: ["颱風", "8號風球", "八號風球", "typhoon", "signal 8"], isRare: true },
-            { filename: "typhoon8wave.jpg", category: "weather", keywords: ["暴風浪", "風浪", "waves", "storm surge"], isRare: true },
+            // --- 💍 1. 婚禮專屬系列 (Bridal Sanctuary) ---
+            { filename: "bridal_bouquet.jpg", category: "bridal", keywords: ["flower", "bouquet", "floral", "rose", "花", "花球", "捧花", "胸花", "佈置", "手花"], isRare: false },
+            { filename: "find_the_dress.jpg", category: "bridal", keywords: ["dress", "gown", "wedding dress", "bridal gown", "試婚紗", "買婚紗", "禮服", "改裙", "對gown", "say yes"], isRare: true },
+            { filename: "honeymoon_dreaming.jpg", category: "bridal", keywords: ["honeymoon", "trip", "travel", "vacation", "蜜月", "旅行", "請假", "機票"], isRare: false },
+            { filename: "invitation_suite.jpg", category: "bridal", keywords: ["invite", "invitation", "card", "guest", "table", "seat", "帖", "派帖", "座位", "姊妹", "賓客", "寫信封"], isRare: false },
+            { filename: "makeup_trial.jpg", category: "bridal", keywords: ["makeup", "trial", "mua", "化妝", "試妝", "造型", "detail", "髮型", "hair", "wedding look", "confirm 造型"], isRare: true },
+            { filename: "music_selection.jpg", category: "bridal", keywords: ["music", "song", "playlist", "band", "DJ", "音樂", "揀歌", "歌單", "進場", "成長片段"], isRare: false },
+            { filename: "photo_session_prep.jpg", category: "bridal", keywords: ["photo", "video", "photographer", "rundown", "攝影", "攝影師", "錄影", "流程", "timeline", "shot list", "book 攝影師"], isRare: false },
+            { filename: "venue_selection.jpg", category: "bridal", keywords: ["venue", "hall", "hotel", "restaurant", "場地", "睇場", "擺酒", "婚宴", "decor", "佈置", "confirm 場地"], isRare: true },
+            { filename: "wedding_bands.jpg", category: "bridal", keywords: ["ring", "band", "diamond", "戒指", "對戒", "鑽戒", "買戒指", "刻字", "engraving"], isRare: true },
+            { filename: "wedding_cake.jpg", category: "bridal", keywords: ["cake", "dessert", "sweet", "蛋糕", "甜點", "試蛋糕", "訂餅", "wedding cake"], isRare: false },
 
-            { filename: "3_o_clock.jpg", category: "daily", keywords: ["三點", "下午茶", "3點", "休息", "3 o'clock", "tea time", "break"], isRare: false },
-            { filename: "back_up.jpg", category: "work", keywords: ["備份", "backup", "資料", "存檔", "data"], isRare: false },
-            { filename: "bills.jpg", category: "daily", keywords: ["帳單", "交水電", "交租", "找數", "使費", "bill", "bills", "utility", "rent", "payment"], isRare: false },
-            { filename: "call_somebody.jpg", category: "daily", keywords: ["打電話", "打畀", "聯絡", "傾電話", "覆電", "call", "phone", "contact", "ring"], isRare: false },
-            { filename: "cardstatement.jpg", category: "daily", keywords: ["信用卡", "卡數", "statement", "找卡數", "欠款", "credit card", "card statement", "debt"], isRare: true },
-            { filename: "collect_online_shopping.jpg", category: "daily", keywords: ["取件", "收網購", "攞包裹", "速遞", "順豐", "pickup", "delivery", "shopping", "parcel"], isRare: false },
-            { filename: "confirm_flight_ticket.jpg", category: "travel", keywords: ["機票", "確認機票", "航班", "旅行", "flight", "ticket", "airline", "booking"], isRare: true },
-            { filename: "contract.jpg", category: "work", keywords: ["合約", "簽約", "合約文件", "文件", "contract", "sign", "document"], isRare: true },
-            { filename: "festival_in_japan.jpg", category: "travel", keywords: ["日本", "祭典", "旅行", "慶典", "japan", "festival", "trip"], isRare: false },
-            { filename: "fill_aroma_diffuser.jpg", category: "daily", keywords: ["擴香", "香薰", "精油", "加濕器", "aroma", "diffuser", "essential oil"], isRare: false },
-            { filename: "first_aid_box.jpg", category: "misc", keywords: ["急救", "藥箱", "藥物", "膠布", "first aid", "medicine", "bandaid"], isRare: false },
-            { filename: "grocery.jpg", category: "daily", keywords: ["買菜", "超市", "買東西", "購物", "買餸", "超級市場", "grocery", "supermarket", "buy food"], isRare: false },
-            { filename: "gym.jpg", category: "daily", keywords: ["運動", "健身", "跑步", "鍛鍊", "gym", "workout", "running", "exercise"], isRare: false },
-            { filename: "hair_cut.jpg", category: "daily", keywords: ["剪髮", "剪頭髮", "理髮", "整頭髮", "haircut", "hair salon"], isRare: false },
-            { filename: "handover_notes.jpg", category: "work", keywords: ["交接", "交接筆記", "handover", "筆記", "handover notes"], isRare: false },
-            { filename: "hang_clothes.jpg", category: "daily", keywords: ["晾衫", "曬衣服", "洗衣服", "收衫", "laundry", "hang clothes", "wash clothes"], isRare: false },
-            { filename: "hiking.jpg", category: "travel", keywords: ["行山", "爬山", "戶外", "郊遊", "hike", "hiking", "outdoor"], isRare: false },
-            { filename: "hospital_appointment.jpg", category: "misc", keywords: ["看醫生", "醫院", "診所", "覆診", "醫生", "體檢", "doctor", "hospital", "clinic", "appointment"], isRare: true },
-            { filename: "inflight_window.jpg", category: "travel", keywords: ["飛機", "窗戶", "搭飛機", "航程", "airplane", "window", "flight"], isRare: false },
-            { filename: "insurance_renewal.jpg", category: "misc", keywords: ["保險", "續保", "保單", "insurance", "renew"], isRare: false },
-            { filename: "iron_shirt.jpg", category: "daily", keywords: ["燙衫", "熨衣", "熨衫", "恤衫", "iron", "shirt", "pressing"], isRare: false },
-            { filename: "make_reservation.jpg", category: "daily", keywords: ["訂位", "預約", "訂桌", "book位", "reservation", "book table"], isRare: false },
-            { filename: "manage_charging_cable.jpg", category: "misc", keywords: ["充電線", "整理電線", "線材", "收拾", "cable", "charger", "cord"], isRare: false },
-            { filename: "meal_table_booking.jpg", category: "daily", keywords: ["訂餐廳", "食飯", "聚餐", "飯局", "restaurant", "dinner", "lunch"], isRare: false },
-            { filename: "meeting.jpg", category: "work", keywords: ["開會", "會議", "見客戶", "談判", "匯報", "meeting", "sync", "discussion"], isRare: false },
-            { filename: "night_message.jpg", category: "work", keywords: ["夜間訊息", "覆訊息", "短訊", "message", "text", "reply"], isRare: false },
-            { filename: "online_study.jpg", category: "work", keywords: ["上課", "學習", "網課", "讀書", "溫書", "course", "study", "online class"], isRare: false },
-            { filename: "parcel.jpg", category: "daily", keywords: ["包裹", "快遞", "寄信", "速遞", "parcel", "package", "mail"], isRare: false },
-            { filename: "photo.jpg", category: "misc", keywords: ["相片", "照片", "拍照", "沖相", "photo", "picture", "camera"], isRare: false },
-            { filename: "pick_up_kids.jpg", category: "daily", keywords: ["接小孩", "接放學", "接小朋友", "放學", "pickup kids", "school children"], isRare: false },
-            { filename: "plan_the_weekend.jpg", category: "travel", keywords: ["計畫週末", "週末", "行程", "放假", "weekend", "plan trip"], isRare: false },
-            { filename: "plants.jpg", category: "daily", keywords: ["植物", "園藝", "花草", "plant", "gardening"], isRare: false },
-            { filename: "plumber.jpg", category: "misc", keywords: ["水電", "修理", "維修", "師傅", "冷氣", "plumber", "repair", "maintenance"], isRare: false },
-            { filename: "prepare_gift.jpg", category: "misc", keywords: ["準備禮物", "買禮物", "送禮", "gift", "present"], isRare: false },
-            { filename: "presentation.jpg", category: "work", keywords: ["簡報", "報告", "演講", "ppt", "slides", "presentation"], isRare: true },
-            { filename: "raining_night_with_a_cup_of_tea.jpg", category: "daily", keywords: ["雨夜", "茶", "下雨", "喝茶", "tea", "raining night"], isRare: false },
-            { filename: "read_books.jpg", category: "daily", keywords: ["看書", "閱讀", "讀書", "睇書", "read", "book", "reading"], isRare: false },
-            { filename: "recharge_octopus.jpg", category: "travel", keywords: ["八達通", "增值", "八達通卡", "octopus", "recharge octopus"], isRare: false },
-            { filename: "recharge_travel_card.jpg", category: "travel", keywords: ["旅遊卡", "車票", "八達通", "交通卡", "recharge travel card", "travel card", "transit card", "recharge"], isRare: false },
-            { filename: "reporting.jpg", category: "work", keywords: ["工作報告", "reporting", "交功課", "總結", "report", "summary"], isRare: false },
-            { filename: "return_book.jpg", category: "daily", keywords: ["還書", "圖書館", "借書", "library", "return book"], isRare: false },
-            { filename: "salad.jpg", category: "daily", keywords: ["沙拉", "食齋", "輕食", "健康餐", "salad", "diet", "healthy meal"], isRare: false },
-            { filename: "scatch.jpg", category: "work", keywords: ["草稿", "速寫", "塗鴉", "筆記", "sketch", "draft", "notes"], isRare: false },
-            { filename: "send_happy_birthday_message.jpg", category: "misc", keywords: ["生日", "慶祝", "祝福", "生日快樂", "birthday", "happy birthday"], isRare: false },
-            { filename: "snowing_night_in_japan.jpg", category: "travel", keywords: ["下雪", "雪夜", "日本雪景", "雪", "snow night", "japan snow"], isRare: false },
-            { filename: "study.jpg", category: "work", keywords: ["溫書", "K書", "研讀", "筆記", "study", "studying"], isRare: false },
-            { filename: "supplement.jpg", category: "misc", keywords: ["保健品", "維他命", "食藥", "營養品", "supplement", "vitamins", "pills"], isRare: false },
-            { filename: "tidy_bedings.jpg", category: "daily", keywords: ["整理床鋪", "執床", "床單", "tidy bed", "make bed", "bedding"], isRare: false },
-            { filename: "tidy_up_desktop.jpg", category: "work", keywords: ["整理桌面", "執檯", "桌面", "tidy desk", "clean desk"], isRare: false },
-            { filename: "umbrella.jpg", category: "daily", keywords: ["雨傘", "帶遮", "下雨", "umbrella"], isRare: false },
-            { filename: "utility_bills.jpg", category: "daily", keywords: ["交水電", "帳單", "差餉", "交租", "utility bills", "electricity bill"], isRare: false },
-            { filename: "vitamin_c_supplement.jpg", category: "misc", keywords: ["維他命c", "維生素", "保健食品", "vitamin c", "vitamins"], isRare: false },
-            { filename: "water_plants.jpg", category: "daily", keywords: ["澆水", "淋花", "植物澆水", "water plants", "watering"], isRare: false },
-            { filename: "writer_block.jpg", category: "work", keywords: ["寫作瓶頸", "靈感", "寫文章", "創作", "writer's block", "writing", "blog"], isRare: false }
+            // --- 🌦️ 2. 天氣與自然系列 ---
+            { filename: "Clear_sky.jpg", category: "weather", keywords: ["clear", "sunny", "fine", "晴天", "晴朗", "好天氣", "藍天"], isRare: false },
+            { filename: "cloudy_day.jpg", category: "weather", keywords: ["cloudy", "overcast", "多雲", "陰天", "雲"], isRare: false },
+            { filename: "cloudy.jpg", category: "weather", keywords: ["clouds", "cloudy", "厚雲", "灰天"], isRare: false },
+            { filename: "heavy_rain.jpg", category: "weather", keywords: ["heavy rain", "storm", "downpour", "暴雨", "大雨", "狂雨"], isRare: true },
+            { filename: "light_rain.jpg", category: "weather", keywords: ["light rain", "drizzle", "shower", "小雨", "毛毛雨", "細雨"], isRare: false },
+            { filename: "lightning.jpg", category: "weather", keywords: ["lightning", "thunder", "flash", "閃電", "雷暴", "行雷"], isRare: true },
+            { filename: "lightning_night.jpg", category: "weather", keywords: ["night storm", "雷雨夜", "行雷閃電"], isRare: true },
+            { filename: "raining.jpg", category: "weather", keywords: ["rain", "raining", "下雨", "雨中"], isRare: false },
+            { filename: "rainy.jpg", category: "weather", keywords: ["rainy", "wet", "雨"], isRare: false },
+            { filename: "rainy_day.jpg", category: "weather", keywords: ["rainy day", "rainy afternoon", "雨天", "落雨"], isRare: false },
+            { filename: "snow.jpg", category: "weather", keywords: ["snow", "snowing", "winter", "下雪", "雪", "雪花"], isRare: false },
+            { filename: "sun.jpg", category: "weather", keywords: ["sun", "sunshine", "陽光", "日照"], isRare: false },
+            { filename: "sunny.jpg", category: "weather", keywords: ["sunny day", "好陽光", "晴好"], isRare: false },
+            { filename: "typhoon8.jpg", category: "weather", keywords: ["typhoon", "signal 8", "hurricane", "gale", "颱風", "8號風球", "八號風球"], isRare: true },
+            { filename: "typhoon8wave.jpg", category: "weather", keywords: ["waves", "storm surge", "rough sea", "暴風浪", "風浪", "巨浪"], isRare: true },
+
+            // --- ☕ 3. 日常生活與雜務系列 ---
+            { filename: "3_o_clock.jpg", category: "daily", keywords: ["3 o'clock", "tea time", "break", "rest", "三點", "下午茶", "3點", "休息", "歇一會"], isRare: false },
+            { filename: "bills.jpg", category: "daily", keywords: ["bill", "utility", "rent", "payment", "water", "electricity", "水費", "電費", "煤氣", "差餉", "管理費", "交租", "帳單", "找數", "使費", "交水電"], isRare: false },
+            { filename: "call_somebody.jpg", category: "daily", keywords: ["call", "phone", "contact", "ring", "speak to", "打電話", "打畀", "聯絡", "覆電", "打給"], isRare: false },
+            { filename: "cardstatement.jpg", category: "daily", keywords: ["credit card", "card statement", "debt", "statement", "信用卡", "卡數", "找卡數", "欠款"], isRare: true },
+            { filename: "collect_online_shopping.jpg", category: "daily", keywords: ["pickup", "delivery", "shopping", "parcel", "取件", "收網購", "攞包裹", "速遞", "順豐"], isRare: false },
+            { filename: "fill_aroma_diffuser.jpg", category: "daily", keywords: ["aroma", "diffuser", "essential oil", "scent", "candle", "擴香", "香薰", "精油", "加濕器"], isRare: false },
+            { filename: "grocery.jpg", category: "daily", keywords: ["grocery", "supermarket", "market", "food", "買菜", "超市", "買嘢", "購物", "買餸", "超級市場"], isRare: false },
+            { filename: "gym.jpg", category: "daily", keywords: ["gym", "workout", "running", "exercise", "fitness", "運動", "健身", "跑步", "鍛鍊"], isRare: false },
+            { filename: "hair_cut.jpg", category: "daily", keywords: ["haircut", "hair salon", "barber", "hair", "剪髮", "剪頭髮", "理髮", "整頭髮"], isRare: false },
+            { filename: "hang_clothes.jpg", category: "daily", keywords: ["laundry", "hang clothes", "wash clothes", "晾衫", "曬衣服", "洗衣服", "收衫"], isRare: false },
+            { filename: "iron_shirt.jpg", category: "daily", keywords: ["iron", "shirt", "pressing", "ironing", "燙衫", "熨衣", "熨衫", "恤衫"], isRare: false },
+            { filename: "make_reservation.jpeg", category: "daily", keywords: ["reservation", "book table", "booking", "table", "訂位", "預約", "訂桌", "book位"], isRare: false },
+            { filename: "manage_charging_cable.jpg", category: "daily", keywords: ["cable", "charger", "cord", "wires", "充電線", "整理電線", "線材", "收拾"], isRare: false },
+            { filename: "meal_table_booking.jpg", category: "daily", keywords: ["restaurant", "dinner", "lunch", "eat", "food", "訂餐廳", "食飯", "聚餐", "飯局"], isRare: false },
+            { filename: "parcel.jpg", category: "daily", keywords: ["parcel", "package", "mail", "post", "包裹", "快遞", "寄信", "速遞"], isRare: false },
+            { filename: "Pick_up_kids.jpg", category: "daily", keywords: ["pickup kids", "school children", "kids", "school", "接小孩", "接放學", "接小朋友", "放學"], isRare: false },
+            { filename: "plants.jpg", category: "daily", keywords: ["plant", "gardening", "flowers", "植物", "園藝", "花草"], isRare: false },
+            { filename: "raining_night_with_a_cup_of_tea.jpg", category: "daily", keywords: ["tea", "raining night", "hot tea", "night rain", "雨夜", "茶", "下雨", "喝茶"], isRare: false },
+            { filename: "read_books.jpg", category: "daily", keywords: ["read", "book", "reading", "novel", "看書", "閱讀", "讀書", "睇書"], isRare: false },
+            { filename: "return_book.jpg", category: "daily", keywords: ["library", "return book", "borrow", "還書", "圖書館", "借書"], isRare: false },
+            { filename: "salad.jpg", category: "daily", keywords: ["salad", "diet", "healthy meal", "veggie", "沙拉", "食齋", "輕食", "健康餐"], isRare: false },
+            { filename: "send_happy_birthday_message.jpg", category: "daily", keywords: ["birthday", "happy birthday", "celebrate", "生日", "慶祝", "祝福", "生日快樂"], isRare: false },
+            { filename: "tidy_bedings.jpg", category: "daily", keywords: ["tidy bed", "make bed", "bedding", "sheets", "整理床鋪", "執床", "床單"], isRare: false },
+            { filename: "umbrella.jpg", category: "daily", keywords: ["umbrella", "rain gear", "雨傘", "帶遮"], isRare: false },
+            { filename: "utility_bills.jpg", category: "daily", keywords: ["utility bills", "electricity bill", "water bill", "交水電", "帳單", "差餉", "交租"], isRare: false },
+            { filename: "water_plants.jpg", category: "daily", keywords: ["water plants", "watering", "plants water", "澆水", "淋花", "植物澆水"], isRare: false },
+            { filename: "first_aid_box.jpg", category: "daily", keywords: ["first aid", "medicine", "bandaid", "pills", "medical", "急救", "藥箱", "藥物", "膠布"], isRare: false },
+            { filename: "insurance_renewal.jpg", category: "daily", keywords: ["insurance", "renew", "policy", "保險", "續保", "保單"], isRare: false },
+            { filename: "photo.jpg", category: "daily", keywords: ["photo", "picture", "camera", "gallery", "相片", "照片", "拍照", "沖相"], isRare: false },
+            { filename: "plumber.jpg", category: "daily", keywords: ["plumber", "repair", "maintenance", "fix", "leak", "水電", "修理", "維修", "師傅", "冷氣"], isRare: false },
+            { filename: "prepare_gift.jpg", category: "daily", keywords: ["gift", "present", "birthday gift", "準備禮物", "買禮物", "送禮"], isRare: false },
+            { filename: "supplement.jpg", category: "daily", keywords: ["supplement", "vitamins", "pills", "health", "保健品", "維他命", "食藥", "營養品"], isRare: false },
+            { filename: "vitamin_C_supplement.jpg", category: "daily", keywords: ["vitamin c", "vitamins", "vc", "維他命c", "維生素", "保健食品"], isRare: false },
+
+            // --- 💻 4. 工作與生產力系列 ---
+            { filename: "back_up.jpg", category: "work", keywords: ["backup", "data", "save", "sync files", "備份", "資料", "存檔"], isRare: false },
+            { filename: "contract.jpg", category: "work", keywords: ["contract", "sign", "document", "agreement", "合約", "簽約", "合約文件", "文件"], isRare: true },
+            { filename: "design drawing.jpg", category: "work", keywords: ["design", "drawing", "sketch", "blueprints", "設計圖", "草圖", "圖紙"], isRare: false },
+            { filename: "handover_notes.jpg", category: "work", keywords: ["handover", "notes", "passing over", "交接", "交接筆記", "筆記"], isRare: false },
+            { filename: "hospital_appointment.jpg", category: "work", keywords: ["doctor", "hospital", "clinic", "appointment", "checkup", "看醫生", "醫院", "診所", "覆診", "醫生", "體檢"], isRare: true },
+            { filename: "meeting.jpg", category: "work", keywords: ["meeting", "sync", "boss", "client", "briefing", "開會", "會議", "見客", "老闆", "老細", "上司"], isRare: false },
+            { filename: "night_message.jpg", category: "work", keywords: ["message", "text", "reply", "whatsapp", "email", "訊息", "覆 email", "短訊", "回電"], isRare: false },
+            { filename: "online_study.jpg", category: "work", keywords: ["study", "online class", "zoom", "class", "course", "上課", "學習", "網課", "讀書", "溫書"], isRare: false },
+            { filename: "presentation.jpg", category: "work", keywords: ["presentation", "ppt", "slides", "deck", "pitch", "簡報", "報告", "演講"], isRare: true },
+            { filename: "Reporting.jpg", category: "work", keywords: ["reporting", "report", "summary", "weekly report", "工作報告", "總結", "交功課"], isRare: false },
+            { filename: "scatch.jpg", category: "work", keywords: ["sketch", "draft", "notes", "drawing", "草稿", "速寫", "塗鴉", "筆記"], isRare: false },
+            { filename: "Study.jpg", category: "work", keywords: ["studying", "study", "exam", "revision", "溫書", "K書", "研讀", "筆記"], isRare: false },
+            { filename: "tidy_up_desktop.jpg", category: "work", keywords: ["desk", "desktop", "workspace", "clean", "整理桌面", "辦公桌", "執檯", "整理凌亂辦公桌"], isRare: false },
+            { filename: "writer_block.jpg", category: "work", keywords: ["writer's block", "writing", "article", "essay", "寫作", "文章", "創作", "靈感", "寫作瓶頸"], isRare: false },
+
+            // --- ✈️ 5. 旅行與探索系列 ---
+            { filename: "confirm_flight_ticket.jpg", category: "travel", keywords: ["flight", "plane", "ticket", "airline", "book flight", "機票", "航班", "訂機票", "確認機票"], isRare: true },
+            { filename: "festival_in_japan.jpg", category: "travel", keywords: ["japan", "festival", "trip", "tokyo", "kyoto", "日本", "祭典", "旅行", "慶典"], isRare: false },
+            { filename: "hiking.jpg", category: "travel", keywords: ["hike", "hiking", "outdoor", "trekking", "mountain", "行山", "爬山", "戶外", "郊遊"], isRare: false },
+            { filename: "inflight_window.jpg", category: "travel", keywords: ["airplane", "window", "flight", "sky view", "飛機", "窗戶", "搭飛機", "航程"], isRare: false },
+            { filename: "plan_the_weekend.jpg", category: "travel", keywords: ["weekend", "plan trip", "holiday", "itinerary", "計畫週末", "週末", "行程", "放假"], isRare: false },
+            { filename: "recharge_octopus.jpg", category: "travel", keywords: ["octopus", "card topup", "八達通", "增值", "八達通卡"], isRare: false },
+            { filename: "recharge_travel_card.jpg", category: "travel", keywords: ["recharge travel card", "travel card", "transit card", "recharge", "旅遊卡", "車票", "八達通", "交通卡"], isRare: false },
+            { filename: "snowing_night_in_japan.jpg", category: "travel", keywords: ["snow night", "japan snow", "kyoto snow", "下雪", "雪夜", "日本雪景", "雪"], isRare: false }
         ];
 
+        // 🌟 智慧評分匹配系統（支援 79 張圖卡精準命中）
         function matchImageAndCategory(taskText) {
             if (!taskText) return { filename: "read_books.jpg", category: "daily" };
             const text = taskText.toLowerCase();
+            
+            let bestMatch = null;
+            let highestScore = 0;
+
             for (let item of imageDatabase) {
                 if (item.keywords) {
+                    let score = 0;
                     for (let word of item.keywords) {
                         if (text.includes(word.toLowerCase())) {
-                            return { filename: item.filename, category: item.category };
+                            score += word.length;
                         }
+                    }
+                    if (score > highestScore) {
+                        highestScore = score;
+                        bestMatch = { filename: item.filename, category: item.category };
                     }
                 }
             }
-            return { filename: "read_books.jpg", category: "daily" };
+
+            if (bestMatch && highestScore > 0) {
+                return bestMatch;
+            }
+
+            // 智慧 Fallback
+            const fallbackPool = ["read_books.jpg", "3_o_clock.jpg", "fill_aroma_diffuser.jpg", "Clear_sky.jpg"];
+            const randomFallback = fallbackPool[Math.floor(Math.random() * fallbackPool.length)];
+            return { filename: randomFallback, category: "daily" };
         }
 
         const encouragementPhrases = [
             "✨ 太棒了！完成了一項重要的待辦事項，給自己一個溫柔的微笑吧。",
             "☕ 每剔除一項，內心就多了一分清爽，你做得很好。",
-            "🌿 步伐不在快，而在於前進。為自己的每一步喝彩。",
-            "💫 陽光正好，微風不燥，把完成的事好好收進回憶裡。",
-            "🕊️ 卸下了一件重擔，今天的你比昨天更輕盈了。",
-            "🌱 默默完成了一件心事，給內心的自己一個大大的擁抱。",
-            "🌙 關關難過關關過，今晚你可以安心地把擔憂收起來了。",
-            "🍃 每一項被勾選的待辦，都是你對自己溫柔的負責。",
-            "⭐ 內心的雜音少了一點，離甜美的夢鄉就更近了一步。",
-            "🌊 乘風破浪辛苦了，現在是屬於你的平靜避風港。",
-            "🔥 今天的能量燃燒得很漂亮，接下來好好充個電吧。",
-            "🎈 少了一件懸在心頭的事，氣球就能往夢想飄得更高。",
-            "🌻 你比想像中更有力量，把完成的事好好收藏在心底。",
-            "🛋️ 任務完成！現在可以毫無罪惡感地陷進舒適的被窩裡。",
-            "🎯 目標一個一個實現，生活正在往好的方向輕輕轉動。",
-            "🎨 把生活過成自己喜歡的節奏，你今天表現得無可挑剔。",
-            "🔮 未來還很遠，但今晚的安穩是由你親手爭取來的。",
-            "🎧 讓心靈聽見自己的掌聲，你真的把事情處理得很棒。",
-            "🧩 生活就像拼圖，又完美拼上一塊了，今晚好好睡個好覺。",
-            "🌅 卸下白天的鎧甲，迎接專屬於你的溫柔黑夜。",
-            "🧭 導航人生不需要慌張，跟著自己的步調，每一步都算數。",
-            "🛡️ 把不安和焦慮都擋在門外，今晚你是最安全的國王。",
-            "🎪 生活縱然繁雜，但你總能把亂麻理出頭緒，真不簡單。",
-            "🕊️ 放飛一隻自由的信鴿，把煩惱通通帶到雲霄之外。",
-            "🍀 好運往往留給懂得適時放手、給自己喘息的人。",
-            "💎 每一份被落實的努力，都在發出閃閃發光的光芒。",
-            "🕰️ 時間從不等待任何人，但你可以學會跟時間溫柔擁抱。",
-            "🎪 在這座忙碌的城市裡，你用自己的方式守住了內心的寧靜。",
-            "🗺️ 地圖上的每個座標都有意義，而你今晚的座標叫作『休息』。",
-            "🌌 抬頭看看星空，你的努力宇宙都有好好記下來。",
-            "📘 把今天這頁精彩的故事好好合上，明天的章節明天再寫。",
-            "🕯️ 點一盞心裡的微光，照亮接下來安心入眠的路。",
-            "🪄 你有一種把複雜變簡單的魔法，今晚好好犒賞自己吧。",
-            "🧸 像個孩子一樣放下防備，世界會好好守護你的夢。",
-            "🏆 今天的最佳主角獎頒給你，晚安，做個好夢。"
+            "🌿 步伐不在快，而在於前進。為自己的每一步喝彩。"
         ];
 
         const appState = {
@@ -649,8 +547,10 @@
         }
 
         const quickTaskPool = [
-            "明天開會簡報", "處理信用卡帳單", "回覆重要客戶訊息", "買菜與日用品", 
-            "確認機票與飯店", "預約醫生覆診", "整理凌亂辦公桌", "查看當地即時天氣"
+            "試婚紗 (Find the Dress)", "Confirm 試妝造型", "睇婚宴場地", 
+            "Book 攝影師傾 Rundown", "派帖與對座位表", "買結婚對戒",
+            "交水電費與管理費", "laundry (洗衫晾衫)", "recharge travel card (八達通增值)", 
+            "book flight (訂機票)", "整理凌亂辦公桌", "設計圖紙 (Design Drawing)"
         ];
 
         let currentRandomQuickTasks = [];
@@ -686,54 +586,18 @@
         function downloadQuoteCard(quoteText) {
             const canvas = document.getElementById('share-canvas');
             const ctx = canvas.getContext('2d');
-
             ctx.fillStyle = '#161615';
             ctx.fillRect(0, 0, 600, 600);
-
             ctx.strokeStyle = 'rgba(212, 181, 176, 0.3)';
             ctx.lineWidth = 2;
             ctx.strokeRect(30, 30, 540, 540);
-
             ctx.fillStyle = '#d4b5b0';
             ctx.font = '14px -apple-system, sans-serif';
             ctx.textAlign = 'center';
             ctx.fillText('NIGHTLY SANCTUARY • VERA', 300, 80);
-
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(150, 110);
-            ctx.lineTo(450, 110);
-            ctx.stroke();
-
             ctx.fillStyle = '#f2f2ef';
             ctx.font = '22px Georgia, serif';
-            ctx.textAlign = 'center';
-            
-            const words = quoteText.split('');
-            let line = '';
-            let lines = [];
-            for(let i = 0; i < words.length; i++) {
-                let testLine = line + words[i];
-                let metrics = ctx.measureText(testLine);
-                if (metrics.width > 420 && i > 0) {
-                    lines.push(line);
-                    line = words[i];
-                } else {
-                    line = testLine;
-                }
-            }
-            lines.push(line);
-
-            let startY = 250 - (lines.length * 20);
-            lines.forEach((l, index) => {
-                ctx.fillText(`“ ${l} ”`, 300, startY + (index * 42));
-            });
-
-            ctx.fillStyle = '#777';
-            ctx.font = '12px -apple-system, sans-serif';
-            ctx.fillText('今夜由 VERA 陪你安穩入眠', 300, 510);
-
+            ctx.fillText(`“ ${quoteText} ”`, 300, 300);
             const link = document.createElement('a');
             link.download = 'VERA-Sanctuary-Card.png';
             link.href = canvas.toDataURL('image/png');
@@ -745,39 +609,23 @@
             const statusEl = document.getElementById('breath-instruction-text');
             const timerEl = document.getElementById('breath-timer-text');
             if (!statusEl) return;
-
             let timeLeft = 4;
             let phase = 1;
-
             const runTimer = () => {
                 if (!document.getElementById('breath-instruction-text')) {
                     clearInterval(breathInterval);
                     return;
                 }
-
                 if (timeLeft > 0) {
                     if(timerEl) timerEl.innerText = timeLeft + " 秒";
                     timeLeft--;
                 } else {
-                    if (phase === 1) {
-                        phase = 2;
-                        timeLeft = 7;
-                        statusEl.innerText = "【 溫柔屏住氣息... 】";
-                        if(timerEl) timerEl.innerText = timeLeft + " 秒";
-                    } else if (phase === 2) {
-                        phase = 3;
-                        timeLeft = 8;
-                        statusEl.innerText = "【 從口中細細吐氣... 】";
-                        if(timerEl) timerEl.innerText = timeLeft + " 秒";
-                    } else {
-                        phase = 1;
-                        timeLeft = 4;
-                        statusEl.innerText = "【 鼻腔緩慢吸氣... 】";
-                        if(timerEl) timerEl.innerText = timeLeft + " 秒";
-                    }
+                    if (phase === 1) { phase = 2; timeLeft = 7; statusEl.innerText = "【 溫柔屏住氣息... 】"; }
+                    else if (phase === 2) { phase = 3; timeLeft = 8; statusEl.innerText = "【 從口中細細吐氣... 】"; }
+                    else { phase = 1; timeLeft = 4; statusEl.innerText = "【 鼻腔緩慢吸氣... 】"; }
+                    if(timerEl) timerEl.innerText = timeLeft + " 秒";
                 }
             };
-
             statusEl.innerText = "【 鼻腔緩慢吸氣... 】";
             if(timerEl) timerEl.innerText = "4 秒";
             breathInterval = setInterval(runTimer, 1000);
@@ -790,11 +638,7 @@
             if (!screen) return;
             screen.innerHTML = "";
 
-            if (breathInterval) {
-                clearInterval(breathInterval);
-                breathInterval = null;
-            }
-
+            if (breathInterval) { clearInterval(breathInterval); breathInterval = null; }
             if (screenName === 'intro') {
                 if(footer) footer.style.display = 'none';
                 stopSoundscape();
@@ -818,41 +662,33 @@
                 screen.innerHTML = `
                     <div id="intro-screen-container" style="text-align: center; display: flex; flex-direction: column; height: 100%; justify-content: space-around; padding: 10px 0;">
                         <div>
-                            <span style="font-size: 11px; letter-spacing: 4px; color: #888;">NIGHTLY SANCTUARY</span>
-                            <h2 style="font-size: 15px; font-weight: 300; color: #f2f2ef; font-family: Georgia, serif; margin-top: 6px; letter-spacing: 1px;">把深夜的思緒，化為安穩的夜色</h2>
+                            <span style="font-size: 16px; letter-spacing: 4px; color: #888;">NIGHTLY SANCTUARY</span>
+                            <h2 style="font-size: 26px; font-weight: 300; color: #f2f2ef; font-family: Georgia, serif; margin-top: 10px; letter-spacing: 1px; line-height: 1.4;">把深夜的思緒，化為安穩的夜色</h2>
                         </div>
 
-                        <div style="width: 100%; height: 300px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(212,181,176,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.7); cursor: pointer;" onclick="openModal('images/${currentIntroImage}', 'VERA 當地即時夜色圖卡')">
+                        <div style="width: 100%; height: 260px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(212,181,176,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.7); cursor: pointer;" onclick="openModal('images/${currentIntroImage}', 'VERA 當地即時夜色圖卡')">
                             <img id="intro-img-element" src="images/${currentIntroImage}" style="width: 100%; height: 100%; object-fit: cover;" alt="夜色圖卡">
                         </div>
 
                         <div>
-                            <button class="btn-primary" onclick="finishIntro()">開啟寧靜之旅 ✧</button>
+                            <button class="btn-primary" style="font-size: 18px; padding: 18px;" onclick="finishIntro()">開啟寧靜之旅 ✧</button>
                         </div>
                     </div>
                 `;
             } else if (screenName === 'quote') {
                 const currentQuote = sanctuaryQuotes[appState.currentQuoteIndex];
                 const isSaved = appState.savedQuotes.includes(currentQuote);
-                
                 screen.innerHTML = `
                     <div style="text-align: center;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                            <p style="font-size: 10px; letter-spacing: 3px; color: #666;">SANCTUARY REFLECTION</p>
+                            <p style="font-size: 11px; letter-spacing: 3px; color: #666;">SANCTUARY REFLECTION</p>
                             <div>
-                                <button onclick="toggleSaveQuote('${currentQuote}')" style="background:none; border:none; color: ${isSaved ? '#ffd700' : '#888'}; font-size: 14px; cursor: pointer; margin-right: 8px;" title="收藏金句">
-                                    ${isSaved ? '★ 已收藏' : '☆ 收藏'}
-                                </button>
-                                <button onclick="downloadQuoteCard('${currentQuote}')" style="background:rgba(212,181,176,0.1); border: 1px solid rgba(212,181,176,0.3); color: #d4b5b0; padding: 2px 6px; border-radius: 6px; font-size: 10px; cursor: pointer;" title="下載卡片">
-                                    💾 下載卡片
-                                </button>
+                                <button onclick="toggleSaveQuote('${currentQuote}')" style="background:none; border:none; color: ${isSaved ? '#ffd700' : '#888'}; font-size: 13px; cursor: pointer; margin-right: 8px;">${isSaved ? '★ 已收藏' : '☆ 收藏'}</button>
+                                <button onclick="downloadQuoteCard('${currentQuote}')" style="background:rgba(212,181,176,0.1); border: 1px solid rgba(212,181,176,0.3); color: #d4b5b0; padding: 3px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">💾 下載</button>
                             </div>
                         </div>
-
                         <div class="card">
-                            <p style="font-size: 17px; line-height: 1.9; color: #f2f2ef; font-family: Georgia, serif; font-weight: 300;">
-                                “${currentQuote}”
-                            </p>
+                            <p style="font-size: 18px; line-height: 1.9; color: #f2f2ef; font-family: Georgia, serif; font-weight: 300;">“${currentQuote}”</p>
                         </div>
                         <button class="btn-primary" onclick="goTo('step1')">開始今晚的待辦卸載</button>
                     </div>
@@ -860,38 +696,35 @@
             } else if (screenName === 'step1') {
                 let quickButtonsHtml = '';
                 currentRandomQuickTasks.forEach(task => {
-                    quickButtonsHtml += `<button onclick="appendQuickTask('${task}')" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 5px 9px; border-radius: 6px; font-size: 10px; cursor: pointer;">+ ${task}</button>`;
+                    quickButtonsHtml += `<button onclick="appendQuickTask('${task}')" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #ddd; padding: 8px 12px; border-radius: 8px; font-size: 14px; cursor: pointer;">+ ${task}</button>`;
                 });
 
                 screen.innerHTML = `
                     <div>
-                        <p style="font-size: 10px; letter-spacing: 3px; color: #666; margin-bottom: 2px; text-align: center;">COGNITIVE OFFLOADING</p>
-                        <h3 style="font-size: 17px; font-weight: 300; margin-bottom: 6px; color: #f2f2ef; font-family: Georgia, serif; text-align: center;">寫下今晚掛記的待辦事項</h3>
-                        <p style="font-size: 10px; color: #888; margin-bottom: 12px; text-align: center;">每行輸入一項（中英文皆可），卸載重大待辦可解鎖稀有金卡</p>
+                        <p style="font-size: 15px; letter-spacing: 3px; color: #888; margin-bottom: 6px; text-align: center;">COGNITIVE OFFLOADING</p>
+                        <h3 style="font-size: 26px; font-weight: 300; margin-bottom: 10px; color: #f2f2ef; font-family: Georgia, serif; text-align: center;">寫下今晚掛記的待辦事項</h3>
+                        <p style="font-size: 15px; color: #aaa; margin-bottom: 16px; text-align: center; line-height: 1.5;">每行輸入一項，卸載重要待辦可解鎖稀有金卡 ✧</p>
 
-                        <textarea id="user-task-input" class="text-input-box" placeholder="例如：&#10;recharge travel card&#10;處理信用卡帳單">${appState.tempInputText}</textarea>
+                        <textarea id="user-task-input" class="text-input-box" placeholder="例如：&#10;laundry&#10;recharge travel card&#10;book flight">${appState.tempInputText}</textarea>
                         
-                        <div style="margin-bottom: 12px;">
-                            <p style="font-size: 10px; color: #777; margin-bottom: 4px;">常用待辦推薦：</p>
-                            <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                        <div style="margin-bottom: 16px;">
+                            <p style="font-size: 14px; color: #999; margin-bottom: 8px;">隨機推薦點選（每次不同）：</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                                 ${quickButtonsHtml}
                             </div>
                         </div>
 
-                        <button class="btn-primary" style="margin-top:0;" onclick="submitTextTask()">將待辦轉化為夜色圖卡 ✧</button>
+                        <button class="btn-primary" style="font-size: 18px; padding: 18px; margin-top:0;" onclick="submitTextTask()">將待辦轉化為夜色圖卡 ✧</button>
                     </div>
                 `;
             } else if (screenName === 'transition') {
-                // 🌟 方案 B：溫柔的過渡引導屏（需手動點擊才進助眠）
                 screen.innerHTML = `
                     <div style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
                         <div style="width: 70px; height: 70px; margin: 0 auto 20px auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(212,181,176,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center;" class="breathing-circle-sync">
                             <span style="font-size: 20px; color: #d4b5b0;">☾</span>
                         </div>
-                        <h3 style="font-size: 17px; font-weight: 300; color: #f2f2ef; font-family: Georgia, serif; margin-bottom: 8px;">思緒已安穩收入夜色中</h3>
-                        <p style="font-size: 12px; color: #888; line-height: 1.6; margin-bottom: 24px; padding: 0 10px;">
-                            行李已經放下。<br>接下來，請把注意力交給呼吸與平靜的頻率。
-                        </p>
+                        <h3 style="font-size: 20px; font-weight: 300; color: #f2f2ef; font-family: Georgia, serif; margin-bottom: 10px;">思緒已安穩收入夜色中</h3>
+                        <p style="font-size: 15px; color: #aaa; line-height: 1.6; margin-bottom: 24px; padding: 0 10px;">行李已經放下。接下來，請把注意力交給呼吸與平靜的頻率。</p>
                         <button class="btn-primary" onclick="goTo('step2')">開始深度放鬆調息 ✧</button>
                     </div>
                 `;
@@ -901,144 +734,110 @@
                         <div style="width: 84px; height: 84px; margin: 10px auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(212,181,176,0.35); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;" class="breathing-circle-sync">
                             ${showBreathTimer ? `<span id="breath-timer-text" style="font-size: 15px; color: #d4b5b0; font-weight: 600; font-family: Georgia, serif;">4s</span>` : `<span style="font-size: 18px; color: #d4b5b0;">✦</span>`}
                         </div>
-                        
-                        <p id="breath-instruction-text" style="font-size: 14px; font-weight: 300; margin-bottom: 4px; color: #d4b5b0; font-family: Georgia, serif; letter-spacing: 1px;">【 鼻腔緩慢吸氣... 】</p>
-                        
+                        <p id="breath-instruction-text" style="font-size: 16px; font-weight: 300; margin-bottom: 6px; color: #d4b5b0; font-family: Georgia, serif; letter-spacing: 1px;">【 鼻腔緩慢吸氣... 】</p>
                         <div style="margin-bottom: 12px;">
-                            <button onclick="toggleBreathTimer()" style="background: none; border: 1px dashed rgba(212,181,176,0.4); color: #aaa; font-size: 9px; padding: 3px 8px; border-radius: 6px; cursor: pointer;">
+                            <button onclick="toggleBreathTimer()" style="background: none; border: 1px dashed rgba(212,181,176,0.4); color: #aaa; font-size: 11px; padding: 4px 8px; border-radius: 6px; cursor: pointer;">
                                 ${showBreathTimer ? "切換為「無數字純光暈」模式" : "切換為「顯示秒數倒數」模式"}
                             </button>
                         </div>
-
-                        <div style="background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); font-size: 11px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="background: rgba(255,255,255,0.02); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); font-size: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
                             <span style="color: #aaa;" id="sound-label">${isSoundPlaying ? "🎵 療癒鋼琴與流光水聲" : "🎵 環境音已關閉"}</span>
-                            <button id="sound-toggle-btn" onclick="toggleSoundscape()" style="background: rgba(212,181,176,0.15); border: none; color: #d4b5b0; padding: 4px 8px; border-radius: 6px; font-size: 10px; cursor: pointer;">${isSoundPlaying ? "關閉環境音" : "開啟環境音"}</button>
+                            <button id="sound-toggle-btn" onclick="toggleSoundscape()" style="background: rgba(212,181,176,0.15); border: none; color: #d4b5b0; padding: 5px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;">${isSoundPlaying ? "關閉環境音" : "開啟環境音"}</button>
                         </div>
-
-                        <button class="btn-primary" style="margin-top: 0; padding: 10px; background-color: transparent; color: #d4b5b0; border: 1px solid rgba(212,181,176,0.4);" onclick="goTo('morning')">結束冥想，進入早晨 ✧</button>
+                        <button class="btn-primary" style="margin-top: 0; padding: 12px; background-color: transparent; color: #d4b5b0; border: 1px solid rgba(212,181,176,0.4);" onclick="goTo('morning')">結束冥想，進入早晨 ✧</button>
                     </div>
                 `;
             } else if (screenName === 'vault') {
                 const totalCount = imageDatabase.length;
                 const unlockedCount = appState.unlockedImages.length;
-                const savedQuotesCount = appState.savedQuotes.length;
-                
                 let html = `<h3 style="font-size: 18px; font-weight: 300; margin-bottom: 2px; color: #f2f2ef; font-family: Georgia, serif;">心靈集郵簿</h3>`;
-                html += `<p style="font-size: 11px; color: #d4b5b0; margin-bottom: 10px; letter-spacing: 1px;">圖卡 ${unlockedCount} / ${totalCount} 張 | 收藏金句 ${savedQuotesCount} 句</p>`;
+                html += `<p style="font-size: 11px; color: #d4b5b0; margin-bottom: 10px; letter-spacing: 1px;">圖卡 ${unlockedCount} / ${totalCount} 張</p>`;
                 
                 const categories = [
-                    { id: 'all', name: '全部圖卡' },
+                    { id: 'all', name: '全部' },
+                    { id: 'bridal', name: '💍 婚禮專屬' },
                     { id: 'weather', name: '天氣' },
+                    { id: 'travel', name: '旅行' },
                     { id: 'daily', name: '日常' },
-                    { id: 'work', name: '工作' },
-                    { id: 'quotes', name: '★ 收藏金句' }
+                    { id: 'work', name: '工作' }
                 ];
 
                 html += `<div style="display: flex; justify-content: center; gap: 4px; margin-bottom: 10px; flex-wrap: wrap;">`;
                 categories.forEach(cat => {
                     const isActive = currentVaultCategory === cat.id;
-                    html += `<button onclick="setVaultCategory('${cat.id}')" style="background: ${isActive ? '#d4b5b0' : 'rgba(255,255,255,0.03)'}; color: ${isActive ? '#161615' : '#888'}; border: 1px solid rgba(212,181,176,0.2); padding: 4px 8px; border-radius: 8px; font-size: 9px; cursor: pointer; font-weight: ${isActive ? '600' : '400'};">${cat.name}</button>`;
+                    html += `<button onclick="setVaultCategory('${cat.id}')" style="background: ${isActive ? '#d4b5b0' : 'rgba(255,255,255,0.03)'}; color: ${isActive ? '#161615' : '#888'}; border: 1px solid rgba(212,181,176,0.2); padding: 4px 8px; border-radius: 8px; font-size: 10px; cursor: pointer; font-weight: ${isActive ? '600' : '400'};">${cat.name}</button>`;
                 });
                 html += `</div>`;
 
-                if (currentVaultCategory === 'quotes') {
-                    html += '<div style="max-height: 250px; overflow-y: auto; text-align: left; display: flex; flex-direction: column; gap: 6px; padding-right: 4px;">';
-                    if (appState.savedQuotes.length > 0) {
-                        appState.savedQuotes.forEach((q) => {
-                            html += `
-                                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,181,176,0.2); border-radius: 12px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <p style="font-size: 12px; color: #f2f2ef; font-family: Georgia, serif; flex: 1; padding-right: 8px;">“${q}”</p>
-                                    <button onclick="downloadQuoteCard('${q}')" style="background: rgba(212,181,176,0.1); border: 1px solid rgba(212,181,176,0.3); color: #d4b5b0; padding: 4px 8px; border-radius: 6px; font-size: 9px; cursor: pointer; flex-shrink: 0;">下載</button>
-                                </div>
-                            `;
-                        });
+                html += '<div style="max-height: 260px; overflow-y: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding-right: 4px;">';
+                imageDatabase.forEach((item, index) => {
+                    if (currentVaultCategory !== 'all' && item.category !== currentVaultCategory) return;
+                    const isUnlocked = appState.unlockedImages.includes(item.filename);
+                    const rareClass = item.isRare ? 'rare-card-glow' : '';
+                    const rareBadge = item.isRare ? '<span style="font-size: 8px; color: #ffd700; font-weight: 600;">✦ 金卡</span>' : '';
+
+                    if (isUnlocked) {
+                        html += `
+                            <div onclick="openModal('images/${item.filename}', '夜色圖卡 #${index+1}')" class="${rareClass}" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,181,176,0.3); border-radius: 12px; padding: 6px; cursor: pointer; text-align: center; height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <img src="images/${item.filename}" style="width: 100%; height: 48px; object-fit: cover; border-radius: 6px; margin-bottom: 2px;" alt="圖卡">
+                                <div style="display: flex; justify-content: space-between; width: 100%; padding: 0 2px;"><span style="font-size: 9px; color: #aaa;">#${index+1}</span>${rareBadge}</div>
+                            </div>
+                        `;
                     } else {
-                        html += '<p style="font-size: 11px; color: #777; text-align: center; padding: 30px 0;">尚未收藏任何金句，點擊「療癒心棧」的星星來收藏吧 ✧</p>';
+                        html += `
+                            <div style="background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.08); border-radius: 12px; padding: 6px; text-align: center; height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <span style="font-size: 12px; opacity: 0.2; margin-bottom: 2px;">${item.isRare ? '✦' : '□'}</span>
+                                <span style="font-size: 9px; color: ${item.isRare ? '#ffd700' : '#555'};">#${index+1} 待解鎖</span>
+                            </div>
+                        `;
                     }
-                    html += '</div>';
-                } else {
-                    html += '<div style="max-height: 250px; overflow-y: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding-right: 4px;">';
-
-                    imageDatabase.forEach((item, index) => {
-                        if (currentVaultCategory !== 'all' && item.category !== currentVaultCategory) return;
-
-                        const isUnlocked = appState.unlockedImages.includes(item.filename);
-                        const rareClass = item.isRare ? 'rare-card-glow' : '';
-                        const rareBadge = item.isRare ? '<span style="font-size: 8px; color: #ffd700; font-weight: 600;">✦ 稀有</span>' : '';
-
-                        if (isUnlocked) {
-                            html += `
-                                <div onclick="openModal('images/${item.filename}', '夜色圖卡 #${index+1} ${item.isRare ? '【✨ 重大事項稀有金卡】' : ''}')" class="${rareClass}" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,181,176,0.3); border-radius: 12px; padding: 6px; cursor: pointer; text-align: center; height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;">
-                                    <img src="images/${item.filename}" style="width: 100%; height: 48px; object-fit: cover; border-radius: 6px; margin-bottom: 2px;" alt="夜色圖卡">
-                                    <div style="display: flex; justify-content: space-between; width: 100%; padding: 0 2px;">
-                                        <span style="font-size: 9px; color: #aaa;">#${index+1}</span>
-                                        ${rareBadge}
-                                    </div>
-                                </div>
-                            `;
-                        } else {
-                            html += `
-                                <div style="background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.08); border-radius: 12px; padding: 6px; text-align: center; height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                    <span style="font-size: 14px; opacity: 0.2; margin-bottom: 2px;">${item.isRare ? '✦' : '□'}</span>
-                                    <span style="font-size: 10px; color: ${item.isRare ? '#ffd700' : '#555'};">#${index+1} 待解鎖</span>
-                                </div>
-                            `;
-                        }
-                    });
-                    html += '</div>';
-                }
-
+                });
+                html += '</div>';
                 screen.innerHTML = html;
             } else if (screenName === 'morning') {
                 let activeTasksHtml = "";
                 let doneTasksHtml = "";
-
                 const activeTasks = appState.taskList.filter(t => !t.done);
                 const doneTasks = appState.taskList.filter(t => t.done);
 
-                if (activeTasks.length > 0) {
-                    activeTasks.forEach((taskObj) => {
-                        const realIndex = appState.taskList.indexOf(taskObj);
-                        activeTasksHtml += `
-                            <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); padding: 10px 12px; border-radius: 14px; margin-bottom: 8px; border: 1px solid rgba(212,181,176,0.15);">
-                                <img src="images/${taskObj.img}" onclick="openModal('images/${taskObj.img}', '${taskObj.text}')" style="width: 38px; height: 38px; object-fit: cover; border-radius: 8px; flex-shrink: 0; cursor: pointer; border: 1px solid rgba(212,181,176,0.2);" title="點擊放大" alt="夜色圖卡">
-                                <div style="flex: 1; text-align: left; display: flex; align-items: center;">
-                                    <input type="checkbox" onchange="toggleTask(${realIndex})" style="accent-color: #d4b5b0; margin-right: 10px; width: 16px; height: 16px; cursor: pointer;">
-                                    <span style="color: #eee; font-size: 13px;">${taskObj.text}</span>
-                                </div>
+                activeTasks.forEach((taskObj) => {
+                    const realIndex = appState.taskList.indexOf(taskObj);
+                    activeTasksHtml += `
+                        <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 14px; margin-bottom: 8px; border: 1px solid rgba(212,181,176,0.15);">
+                            <img src="images/${taskObj.img}" onclick="openModal('images/${taskObj.img}', '${taskObj.text}')" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px; flex-shrink: 0; cursor: pointer;" alt="圖卡">
+                            <div style="flex: 1; text-align: left; display: flex; align-items: center;">
+                                <input type="checkbox" onchange="toggleTask(${realIndex})" style="accent-color: #d4b5b0; margin-right: 12px; width: 18px; height: 18px; cursor: pointer;" title="勾選完成">
+                                <span style="color: #eee; font-size: 14px;">${taskObj.text}</span>
                             </div>
-                        `;
-                    });
-                } else {
-                    activeTasksHtml = '<p style="font-size: 12px; color: #777; text-align: center; padding: 15px 0;">昨天的待辦已經好好封存，今天挑件輕鬆的做，或者甚麼都不做也很好。</p>';
-                }
+                        </div>
+                    `;
+                });
 
-                if (doneTasks.length > 0) {
-                    doneTasks.forEach((taskObj) => {
-                        const realIndex = appState.taskList.indexOf(taskObj);
-                        doneTasksHtml += `
-                            <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.01); padding: 8px 12px; border-radius: 14px; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.05); opacity: 0.6;">
-                                <img src="images/${taskObj.img}" onclick="openModal('images/${taskObj.img}', '${taskObj.text}')" style="width: 32px; height: 32px; object-fit: cover; border-radius: 6px; flex-shrink: 0; cursor: pointer;" title="點擊放大" alt="夜色圖卡">
-                                <div style="flex: 1; text-align: left; display: flex; align-items: center;">
-                                    <input type="checkbox" checked onchange="toggleTask(${realIndex})" style="accent-color: #d4b5b0; margin-right: 10px; width: 16px; height: 16px; cursor: pointer;" title="改回進行中">
-                                    <span style="color: #888; font-size: 12px; text-decoration: line-through;">${taskObj.text}</span>
-                                </div>
+                doneTasks.forEach((taskObj) => {
+                    const realIndex = appState.taskList.indexOf(taskObj);
+                    doneTasksHtml += `
+                        <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.01); padding: 8px 12px; border-radius: 14px; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.05); opacity: 0.6;">
+                            <img src="images/${taskObj.img}" onclick="openModal('images/${taskObj.img}', '${taskObj.text}')" style="width: 32px; height: 32px; object-fit: cover; border-radius: 6px; flex-shrink: 0; cursor: pointer;" alt="圖卡">
+                            <div style="flex: 1; text-align: left; display: flex; align-items: center;">
+                                <input type="checkbox" checked onchange="toggleTask(${realIndex})" style="accent-color: #d4b5b0; margin-right: 10px; width: 16px; height: 16px; cursor: pointer;" title="改回進行中">
+                                <span style="color: #888; font-size: 12px; text-decoration: line-through;">${taskObj.text}</span>
                             </div>
-                        `;
-                    });
-                }
+                        </div>
+                    `;
+                });
+
+                if(activeTasks.length === 0) activeTasksHtml = '<p style="font-size: 13px; color: #777; text-align: center; padding: 15px 0;">昨天的待辦已經全數完成，今天一切安好 ✧</p>';
 
                 screen.innerHTML = `
                     <div style="text-align: center;">
-                        <p style="font-size: 10px; letter-spacing: 3px; color: #666; margin-bottom: 4px;">MORNING GLOW</p>
-                        <h3 style="font-size: 18px; font-weight: 300; margin-bottom: 10px; color: #f2f2ef; font-family: Georgia, serif;">晨光報告</h3>
-                        
+                        <p style="font-size: 11px; letter-spacing: 3px; color: #666; margin-bottom: 4px;">MORNING GLOW</p>
+                        <h3 style="font-size: 20px; font-weight: 300; margin-bottom: 12px; color: #f2f2ef; font-family: Georgia, serif;">晨光報告</h3>
                         <div style="text-align: left; max-height: 280px; overflow-y: auto; padding-right: 4px;">
-                            <p style="font-size: 11px; color: #d4b5b0; letter-spacing: 1px; margin-bottom: 6px;">進行中項目</p>
+                            <p style="font-size: 12px; color: #d4b5b0; letter-spacing: 1px; margin-bottom: 8px;">進行中項目（勾選後才會歸檔）</p>
                             ${activeTasksHtml}
                             
                             ${doneTasks.length > 0 ? `
-                                <p style="font-size: 11px; color: #777; letter-spacing: 1px; margin: 12px 0 6px 0;">已完成項目（點擊取消勾選可改回）</p>
+                                <p style="font-size: 12px; color: #777; letter-spacing: 1px; margin: 14px 0 6px 0;">已完成項目</p>
                                 ${doneTasksHtml}
                             ` : ''}
                         </div>
@@ -1058,7 +857,7 @@
             }
 
             const lines = inputVal.split('\n').filter(t => t.trim() !== "");
-            appState.taskList = lines.map(line => {
+            const newTasks = lines.map(line => {
                 const matchResult = matchImageAndCategory(line);
                 if (!appState.unlockedImages.includes(matchResult.filename)) {
                     appState.unlockedImages.push(matchResult.filename);
@@ -1066,21 +865,19 @@
                 return { text: line, img: matchResult.filename, done: false };
             });
 
+            appState.taskList = [...appState.taskList, ...newTasks];
             appState.tempInputText = "";
             saveState();
-            // 🌟 點擊後跳轉至溫柔的過渡引導屏
             goTo('transition');
         }
 
         function toggleTask(index) {
             appState.taskList[index].done = !appState.taskList[index].done;
             const finishedTask = appState.taskList[index];
-            
             if (finishedTask.done) {
                 const randomPhrase = encouragementPhrases[Math.floor(Math.random() * encouragementPhrases.length)];
                 openModal(`images/${finishedTask.img}`, `${randomPhrase}\n\n已完成：「${finishedTask.text}」`);
             }
-            
             saveState();
             goTo('morning');
         }
